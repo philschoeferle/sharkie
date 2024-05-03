@@ -1,0 +1,26 @@
+class ThrowableObject extends MoveableObject {
+  constructor(x, y, otherDirection, img) {
+    super().loadImg(img);
+    this.x = x;
+    this.y = y;
+    this.characterFacingLeft = otherDirection;
+    this.height = 30;
+    this.width = 30;
+
+    this.shoot();
+  }
+
+  shoot() {
+    this.speedY = 30;
+    if (!this.characterFacingLeft) {
+      setInterval(() => {
+        this.x += 10;
+      }, 25);
+    } else {
+      this.x -= 160;
+      setInterval(() => {
+        this.x -= 10;
+      }, 25);
+    }
+  }
+}
