@@ -15,6 +15,7 @@ class Jellyfish extends MoveableObject {
   height = 70;
   width = 100;
   y = 80;
+  floatDirection = "right";
 
   constructor() {
     super().loadImg("img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");
@@ -49,15 +50,21 @@ class Jellyfish extends MoveableObject {
   startFloating() {
     setInterval(() => {
       this.floatToSurface();
-    }, 50);
+    }, 200);
   }
 
   floatToSurface() {
     this.y -= 5;
-    if (this.otherDirection) {
-      this.x -= 5;
-    } else {
+    if (this.floatDirection === "right") {
       this.x += 5;
+      setTimeout(() => {
+        this.floatDirection = "left";
+      }, 50);
+    } else {
+      this.x -= 5;
+      setTimeout(() => {
+        this.floatDirection = "right";
+      }, 50);
     }
   }
 }

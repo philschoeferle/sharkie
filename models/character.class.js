@@ -93,6 +93,8 @@ class Character extends MoveableObject {
   width = 200;
   height = 200;
   y = 200;
+  offsetY = 80;
+  offsetX = 80;
   speed = 3;
   idleCounter = 0;
   attacking = false;

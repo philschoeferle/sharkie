@@ -151,7 +151,7 @@ class World {
     setInterval(() => {
       this.throwableObjects.forEach((bubble, shotBubble) => {
         this.level.pufferfishes.forEach((enemy) => {
-          if (bubble.isColliding(enemy)) {
+          if (bubble.isBubbleColliding(enemy)) {
             this.removeShotBubble(shotBubble);
             if (!enemy.madPufferfish) {
               enemy.isMadPufferfish();

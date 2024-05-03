@@ -8,7 +8,6 @@ class MoveableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 0.01;
-  offsetY = 0;
   lastHit = 0;
   deadJellyfish = false;
   deadPufferfish = false;
@@ -33,10 +32,10 @@ class MoveableObject extends DrawableObject {
 
   isColliding(obj) {
     return (
-      this.x + 25 + (this.width - 70) >= obj.x &&
-      this.x + 25 <= obj.x + obj.width &&
-      this.y + 80 + this.offsetY + (this.height - 120) >= obj.y &&
-      this.y + 80 + this.offsetY <= obj.y + obj.height
+      this.x + 25 + (this.width - 70) >= obj.x && // Abstand Sharkie zu re. Objekt
+      this.x + this.offsetX <= obj.x + obj.width && // Abstand Sharkie zu li. Objekt
+      this.y + this.offsetY + (this.height - 120) >= obj.y && // Abstand Sharkie zu überliegendem Objekt
+      this.y + this.offsetY <= obj.y + obj.height // Abstand Sharkie zu unterliegendem Objekt
     );
   }
 
@@ -44,8 +43,8 @@ class MoveableObject extends DrawableObject {
     return (
       this.x + this.width >= obj.x &&
       this.x <= obj.x + obj.width &&
-      this.y + this.offsetY + this.height >= obj.y &&
-      this.y + this.offsetY <= obj.y + obj.height
+      this.y + this.height >= obj.y &&
+      this.y <= obj.y + obj.height
     );
   }
 
