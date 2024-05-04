@@ -14,8 +14,9 @@ class Jellyfish extends MoveableObject {
 
   height = 70;
   width = 100;
-  y = 80;
+  y = 50;
   floatDirection = "right";
+  swimDirection = "up";
 
   constructor() {
     super().loadImg("img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");
@@ -29,9 +30,18 @@ class Jellyfish extends MoveableObject {
   }
 
   animate() {
-    /* setInterval(() => {
-      this.moveLeft();
-    }, 1000 / 60); */
+    setInterval(() => {
+      if (this.swimDirection === "up" && this.y > 50) {
+        this.moveUp();
+      } else if (
+        this.swimDirection === "down" &&
+        this.y < 450 - (this.height + 50)
+      ) {
+        this.moveDown();
+      } else {
+        this.swimDirection = this.swimDirection === "up" ? "down" : "up";
+      }
+    }, 1000 / 60);
 
     setInterval(() => {
       this.setJellyfishAnimation();
