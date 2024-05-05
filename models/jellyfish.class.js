@@ -14,15 +14,14 @@ class Jellyfish extends MoveableObject {
 
   height = 70;
   width = 100;
-  y = 50;
   floatDirection = "right";
   swimDirection = "up";
 
   constructor() {
     super().loadImg("img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");
-
-    this.x = 200 + Math.random() * 500;
-    this.speed = 0.15 + Math.random() * 0.25;
+    this.y = 50 + Math.random() * 300;
+    this.x = 200 + Math.random() * 1500;
+    this.speed = 0.5 + Math.random() * 0.25;
 
     this.loadImgs(this.IMAGES_SWIMMING);
     this.loadImgs(this.IMAGES_DEAD);

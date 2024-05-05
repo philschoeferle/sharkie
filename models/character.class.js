@@ -116,10 +116,10 @@ class Character extends MoveableObject {
   animate() {
     setInterval(() => {
       this.swimming_sound.pause();
-      if (this.world.keyboard.UP) {
+      if (this.world.keyboard.UP && this.y > -80) {
         this.y -= this.speed;
       }
-      if (this.world.keyboard.DOWN) {
+      if (this.world.keyboard.DOWN && this.y < 300) {
         this.y += this.speed;
       }
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -136,17 +136,21 @@ class Character extends MoveableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-      if (this.world.keyboard.UP) {
+      if (this.world.keyboard.UP && this.y > -80) {
+        this.idleCounter = 0;
         this.playAnimation(this.IMAGES_SWIMMING);
       }
-      if (this.world.keyboard.DOWN) {
+      if (this.world.keyboard.DOWN && this.y < 300) {
+        this.idleCounter = 0;
         this.playAnimation(this.IMAGES_SWIMMING);
       }
-      if (this.world.keyboard.RIGHT) {
+      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        this.idleCounter = 0;
         this.playAnimation(this.IMAGES_SWIMMING);
         this.otherDirection = false;
       }
-      if (this.world.keyboard.LEFT) {
+      if (this.world.keyboard.LEFT && this.x > 0) {
+        this.idleCounter = 0;
         this.playAnimation(this.IMAGES_SWIMMING);
         this.otherDirection = true;
       }

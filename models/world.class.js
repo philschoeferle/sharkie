@@ -38,18 +38,20 @@ class World {
 
   checkCollisionsWithJellyfish() {
     this.level.jellyfishes.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit();
-        this.healthBar.setPercentage(this.character.health);
+      if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
+        this.damageCharacter();
       }
     });
   }
 
   checkCollisionsWithPufferfish() {
     this.level.pufferfishes.forEach((enemy, hitPufferfish) => {
-      if (this.character.isColliding(enemy) && !this.character.attacking) {
-        this.character.hit();
-        this.healthBar.setPercentage(this.character.health);
+      if (
+        this.character.isColliding(enemy) &&
+        !this.character.attacking &&
+        !enemy.deadPufferfish
+      ) {
+        this.damageCharacter();
       }
       if (this.character.isColliding(enemy) && this.character.attacking) {
         this.removeHitPufferfish(hitPufferfish);
@@ -63,10 +65,14 @@ class World {
   checkCollisionsWithEndboss() {
     this.level.endboss.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hit();
-        this.healthBar.setPercentage(this.character.health);
+        this.damageCharacter();
       }
     });
+  }
+
+  damageCharacter() {
+    this.character.hit();
+    this.healthBar.setPercentage(this.character.health);
   }
 
   checkCollisionsWithCoins() {
