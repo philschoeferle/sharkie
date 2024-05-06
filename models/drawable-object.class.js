@@ -41,6 +41,13 @@ class DrawableObject {
       ctx.strokeStyle = "red";
       if (this instanceof Character) {
         ctx.rect(this.x + 25, this.y + 80, this.height - 50, this.width - 120);
+      } else if (this instanceof Endboss) {
+        ctx.rect(
+          this.x + 20,
+          this.y + 150,
+          this.height - 50,
+          this.width - 200
+        );
       } else {
         ctx.rect(this.x, this.y, this.height, this.width);
       }

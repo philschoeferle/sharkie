@@ -12,6 +12,7 @@ class MoveableObject extends DrawableObject {
   deadJellyfish = false;
   deadPufferfish = false;
   madPufferfish = false;
+  firstContactEndboss = false;
 
   applyGravity() {
     setInterval(() => {
@@ -45,6 +46,15 @@ class MoveableObject extends DrawableObject {
       this.x <= obj.x + obj.width &&
       this.y + this.height >= obj.y &&
       this.y <= obj.y + obj.height
+    );
+  }
+
+  isCollidingWithEndboss(obj) {
+    return (
+      this.x + 25 + (this.width - 70) >= obj.x + 20 && // Abstand Sharkie zu re. Objekt
+      this.x + this.offsetX <= obj.x + obj.width && // Abstand Sharkie zu li. Objekt
+      this.y + this.offsetY + (this.height - 120) >= obj.y + 150 && // Abstand Sharkie zu überliegendem Objekt
+      this.y + this.offsetY <= obj.y + obj.height - 50 // Abstand Sharkie zu unterliegendem Objekt
     );
   }
 
@@ -89,6 +99,10 @@ class MoveableObject extends DrawableObject {
 
   isMadPufferfish() {
     this.madPufferfish = true;
+  }
+
+  isFirstContactEndboss() {
+    this.firstContactEndboss = true;
   }
 
   isDead() {

@@ -9,6 +9,7 @@ class World {
   coinBar = new CoinBar();
   bottleBar = new BottleBar();
   collectedBottles = 0;
+  endbossHealthBar = new EndbossHealthBar();
   throwableObjects = [];
 
   constructor(canvas, keyboard) {
@@ -33,6 +34,8 @@ class World {
       this.checkCollisionsWithBottles();
       this.checkBubbleCollisionsWithJellyfish();
       this.checkBubbleCollisionsWithPufferfish();
+      this.checkBubbleCollisionsWithEndboss();
+      this.checkContactWithEndboss();
     }, 200);
   }
 
@@ -64,10 +67,18 @@ class World {
 
   checkCollisionsWithEndboss() {
     this.level.endboss.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isCollidingWithEndboss(enemy)) {
         this.damageCharacter();
       }
     });
+  }
+
+  checkContactWithEndboss() {
+    if (this.character.x > 1600) {
+      if (!this.character.firstContactEndboss) {
+        this.character.isFirstContactEndboss();
+      }
+    }
   }
 
   damageCharacter() {
@@ -172,6 +183,18 @@ class World {
     setTimeout(() => {
       this.level.pufferfishes.splice(hitPufferfish, 1);
     }, 1000);
+  }
+
+  checkBubbleCollisionsWithEndboss() {
+    setInterval(() => {
+      this.throwableObjects.forEach((bubble, shotBubble) => {
+        this.level.endboss.forEach((enemy) => {
+          if (bubble.isBubbleColliding(enemy)) {
+            this.removeShotBubble(shotBubble);
+          }
+        });
+      });
+    }, 500);
   }
 
   draw() {
