@@ -49,11 +49,12 @@ class Endboss extends MoveableObject {
     "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png",
   ];
 
+  world;
   height = 500;
   width = 500;
   offsetY = 300;
   offsetX = 80;
-  y = -50;
+  y = 2000;
 
   attacking = false;
 
@@ -70,12 +71,18 @@ class Endboss extends MoveableObject {
   }
 
   animate() {
+    let i = 0;
+    this.currentImg = 0;
     setInterval(() => {
-      if (this.contactEndboss) {
+      if (this.firstContactEndboss && i < 10) {
         this.playAnimation(this.IMAGES_INTRO);
+        this.y = -50;
       } else {
         this.playAnimation(this.IMAGES_SWIMMING);
       }
-    }, 250);
+      if (this.firstContactEndboss) {
+        i++;
+      }
+    }, 200);
   }
 }

@@ -9,6 +9,7 @@ class World {
   coinBar = new CoinBar();
   bottleBar = new BottleBar();
   collectedBottles = 0;
+  endboss = new Endboss();
   endbossHealthBar = new EndbossHealthBar();
   throwableObjects = [];
 
@@ -23,6 +24,7 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.endboss.world = this;
   }
 
   run() {
@@ -74,10 +76,12 @@ class World {
   }
 
   checkContactWithEndboss() {
-    if (this.character.x > 1600) {
-      if (!this.character.firstContactEndboss) {
-        this.character.isFirstContactEndboss();
-      }
+    if (this.character.x > 1900) {
+      this.level.endboss.forEach((enemy) => {
+        if (!this.character.firstContactEndboss) {
+          enemy.isFirstContactEndboss();
+        }
+      });
     }
   }
 
@@ -212,7 +216,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.jellyfishes);
     this.addObjectsToMap(this.level.pufferfishes);
-    this.addObjectsToMap(this.level.endboss);
+    this.addToMap(this.endboss);
     this.addObjectsToMap(this.level.lights);
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.coins);
