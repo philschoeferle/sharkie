@@ -51,10 +51,10 @@ class MoveableObject extends DrawableObject {
 
   isCollidingWithEndboss(obj) {
     return (
-      this.x + 25 + (this.width - 70) >= obj.x + 20 && // Abstand Sharkie zu re. Objekt
+      this.x + 25 + (this.width - 70) >= obj.x + 40 && // Abstand Sharkie zu re. Objekt
       this.x + this.offsetX <= obj.x + obj.width && // Abstand Sharkie zu li. Objekt
-      this.y + this.offsetY + (this.height - 120) >= obj.y + 150 && // Abstand Sharkie zu überliegendem Objekt
-      this.y + this.offsetY <= obj.y + obj.height - 50 // Abstand Sharkie zu unterliegendem Objekt
+      this.y + this.offsetY + (this.height - 120) >= obj.y + 250 && // Abstand Sharkie zu überliegendem Objekt
+      this.y + this.offsetY <= obj.y + obj.height - 120 // Abstand Sharkie zu unterliegendem Objekt
     );
   }
 
@@ -134,5 +134,30 @@ class MoveableObject extends DrawableObject {
 
   jump() {
     this.speedY = 10;
+  }
+
+  checkDifference(charX, charY) {
+    if (charX != undefined && charY != undefined) {
+      this.differenceX = charX - this.x;
+      this.differenceY = charY - this.y;
+
+      this.gapX =
+        this.differenceX > 0
+          ? Math.min(10, this.differenceX)
+          : Math.max(-10, this.differenceX);
+      this.gapY =
+        this.differenceY > 0
+          ? Math.min(10, this.differenceY)
+          : Math.max(-10, this.differenceY);
+
+      if (this.gapX > 0) {
+        this.otherDirection = true;
+      } else {
+        this.otherDirection = false;
+      }
+
+      this.position_x += this.gapX;
+      this.position_y += this.gapY;
+    }
   }
 }

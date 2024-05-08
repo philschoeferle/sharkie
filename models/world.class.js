@@ -38,7 +38,14 @@ class World {
       this.checkBubbleCollisionsWithPufferfish();
       this.checkBubbleCollisionsWithEndboss();
       this.checkContactWithEndboss();
+      this.endbossFollowCharacter();
     }, 200);
+  }
+
+  endbossFollowCharacter() {
+    this.endboss.x = this.character.x + 200;
+    this.endboss.y = this.character.y - this.character.height;
+    this.endboss.checkDifference(this.character.x, this.character.y);
   }
 
   checkCollisionsWithJellyfish() {
@@ -68,20 +75,16 @@ class World {
   }
 
   checkCollisionsWithEndboss() {
-    this.level.endboss.forEach((enemy) => {
-      if (this.character.isCollidingWithEndboss(enemy)) {
-        this.damageCharacter();
-      }
-    });
+    if (this.character.isCollidingWithEndboss(this.endboss)) {
+      this.damageCharacter();
+    }
   }
 
   checkContactWithEndboss() {
     if (this.character.x > 1900) {
-      this.level.endboss.forEach((enemy) => {
-        if (!this.character.firstContactEndboss) {
-          enemy.isFirstContactEndboss();
-        }
-      });
+      if (!this.character.firstContactEndboss) {
+        this.endboss.isFirstContactEndboss();
+      }
     }
   }
 
@@ -192,11 +195,9 @@ class World {
   checkBubbleCollisionsWithEndboss() {
     setInterval(() => {
       this.throwableObjects.forEach((bubble, shotBubble) => {
-        this.level.endboss.forEach((enemy) => {
-          if (bubble.isBubbleColliding(enemy)) {
-            this.removeShotBubble(shotBubble);
-          }
-        });
+        if (bubble.isBubbleColliding(this.endboss)) {
+          this.removeShotBubble(shotBubble);
+        }
       });
     }, 500);
   }

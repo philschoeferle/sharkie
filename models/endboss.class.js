@@ -50,11 +50,13 @@ class Endboss extends MoveableObject {
   ];
 
   world;
+  differenceX;
+  differenceY;
   height = 500;
   width = 500;
   offsetY = 300;
   offsetX = 80;
-  y = 2000;
+  y = 1000;
 
   attacking = false;
 

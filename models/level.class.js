@@ -1,7 +1,6 @@
 class Level {
   jellyfishes;
   pufferfishes;
-  endboss;
   lights;
   bottles;
   coins;
@@ -11,7 +10,6 @@ class Level {
   constructor(
     jellyfishes,
     pufferfishes,
-    endboss,
     lights,
     bottles,
     coins,
@@ -19,7 +17,6 @@ class Level {
   ) {
     this.jellyfishes = jellyfishes;
     this.pufferfishes = pufferfishes;
-    this.endboss = endboss;
     this.lights = lights;
     this.bottles = bottles;
     this.coins = coins;
