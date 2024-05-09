@@ -136,28 +136,4 @@ class MoveableObject extends DrawableObject {
     this.speedY = 10;
   }
 
-  checkDifference(charX, charY) {
-    if (charX != undefined && charY != undefined) {
-      this.differenceX = charX - this.x;
-      this.differenceY = charY - this.y;
-
-      this.gapX =
-        this.differenceX > 0
-          ? Math.min(10, this.differenceX)
-          : Math.max(-10, this.differenceX);
-      this.gapY =
-        this.differenceY > 0
-          ? Math.min(10, this.differenceY)
-          : Math.max(-10, this.differenceY);
-
-      if (this.gapX > 0) {
-        this.otherDirection = true;
-      } else {
-        this.otherDirection = false;
-      }
-
-      this.position_x += this.gapX;
-      this.position_y += this.gapY;
-    }
-  }
 }

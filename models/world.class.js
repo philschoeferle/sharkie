@@ -43,9 +43,25 @@ class World {
   }
 
   endbossFollowCharacter() {
-    this.endboss.x = this.character.x + 200;
-    this.endboss.y = this.character.y - this.character.height;
-    this.endboss.checkDifference(this.character.x, this.character.y);
+    let desiredY = this.character.y - this.character.height;
+
+    let distanceX = this.character.x - this.endboss.x;
+    let distanceY = desiredY - this.endboss.y;
+
+    this.checkDistance(distanceX, distanceY);
+  }
+
+  checkDistance(distanceX, distanceY) {
+    let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+    if (distance > 5) {
+      let scaleFactor = 5 / distance;
+      let moveX = distanceX * scaleFactor;
+      let moveY = distanceY * scaleFactor;
+
+      this.endboss.x += moveX;
+      this.endboss.y += moveY;
+    }
   }
 
   checkCollisionsWithJellyfish() {

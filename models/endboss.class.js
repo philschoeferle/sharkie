@@ -50,8 +50,6 @@ class Endboss extends MoveableObject {
   ];
 
   world;
-  differenceX;
-  differenceY;
   height = 500;
   width = 500;
   offsetY = 300;
