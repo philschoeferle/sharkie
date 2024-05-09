@@ -55,7 +55,7 @@ class Endboss extends MoveableObject {
   offsetY = 300;
   offsetX = 80;
   y = 1000;
-
+  madEndboss = false;
   attacking = false;
 
   constructor() {
@@ -72,11 +72,17 @@ class Endboss extends MoveableObject {
 
   animate() {
     let i = 0;
-    this.currentImg = 0;
     setInterval(() => {
       if (this.firstContactEndboss && i < 10) {
         this.playAnimation(this.IMAGES_INTRO);
         this.y = -50;
+      }
+      if (this.madEndboss) {
+        this.playAnimation(this.IMAGES_ATTACKING);
+
+        setTimeout(() => {
+          this.madEndboss = false;
+        }, 1000);
       } else {
         this.playAnimation(this.IMAGES_SWIMMING);
       }

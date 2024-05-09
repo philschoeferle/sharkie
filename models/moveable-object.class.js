@@ -58,6 +58,15 @@ class MoveableObject extends DrawableObject {
     );
   }
 
+  isBubbleCollidingWithEndboss(obj) {
+    return (
+      this.x + this.width >= obj.x + 40 &&
+      this.x <= obj.x + obj.width &&
+      this.y + this.height >= obj.y + 250 &&
+      this.y <= obj.y + obj.height - 120
+    );
+  }
+
   hit() {
     this.health -= 5;
     if (this.health < 0) {
@@ -105,6 +114,11 @@ class MoveableObject extends DrawableObject {
     this.firstContactEndboss = true;
   }
 
+  isMadEndboss() {
+    this.currentImg = 0;
+    this.madEndboss = true;
+  }
+
   isDead() {
     return this.health == 0;
   }
@@ -135,5 +149,4 @@ class MoveableObject extends DrawableObject {
   jump() {
     this.speedY = 10;
   }
-
 }

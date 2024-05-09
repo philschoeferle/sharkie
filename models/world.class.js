@@ -42,28 +42,6 @@ class World {
     }, 200);
   }
 
-  endbossFollowCharacter() {
-    let desiredY = this.character.y - this.character.height;
-
-    let distanceX = this.character.x - this.endboss.x;
-    let distanceY = desiredY - this.endboss.y;
-
-    this.checkDistance(distanceX, distanceY);
-  }
-
-  checkDistance(distanceX, distanceY) {
-    let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-    if (distance > 5) {
-      let scaleFactor = 5 / distance;
-      let moveX = distanceX * scaleFactor;
-      let moveY = distanceY * scaleFactor;
-
-      this.endboss.x += moveX;
-      this.endboss.y += moveY;
-    }
-  }
-
   checkCollisionsWithJellyfish() {
     this.level.jellyfishes.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
@@ -102,6 +80,53 @@ class World {
         this.endboss.isFirstContactEndboss();
       }
     }
+  }
+
+  endbossFollowCharacter() {
+    if (this.endboss.firstContactEndboss) {
+      let desiredY = this.character.y - this.character.height;
+
+      let distanceX = this.character.x - this.endboss.x;
+      let distanceY = desiredY - this.endboss.y;
+
+      this.checkDistance(distanceX, distanceY);
+    }
+  }
+
+  checkDistance(distanceX, distanceY) {
+    let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+    if (distance > 5) {
+      let scaleFactor = 5 / distance;
+      let moveX = distanceX * scaleFactor;
+      let moveY = distanceY * scaleFactor;
+
+      this.endboss.x += moveX;
+      this.endboss.y += moveY;
+
+      this.changeEndbossDirection(moveX);
+    }
+  }
+
+  changeEndbossDirection(moveX) {
+    if (moveX < 0) {
+      this.endboss.otherDirection = false;
+    } else if (moveX >= 3) {
+      this.endboss.otherDirection = true;
+    }
+  }
+
+  checkBubbleCollisionsWithEndboss() {
+    setInterval(() => {
+      this.throwableObjects.forEach((bubble, shotBubble) => {
+        if (bubble.isBubbleCollidingWithEndboss(this.endboss)) {
+          if (!this.endboss.madEndboss) {
+            this.endboss.isMadEndboss();
+          }
+          this.removeShotBubble(shotBubble);
+        }
+      });
+    }, 500);
   }
 
   damageCharacter() {
@@ -208,28 +233,10 @@ class World {
     }, 1000);
   }
 
-  checkBubbleCollisionsWithEndboss() {
-    setInterval(() => {
-      this.throwableObjects.forEach((bubble, shotBubble) => {
-        if (bubble.isBubbleColliding(this.endboss)) {
-          this.removeShotBubble(shotBubble);
-        }
-      });
-    }, 500);
-  }
-
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
-
-    this.ctx.translate(-this.camera_x, 0);
-    // ----- Space for fixed objects -----
-    this.addToMap(this.healthBar);
-    this.addToMap(this.coinBar);
-    this.addToMap(this.bottleBar);
-
-    this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.jellyfishes);
     this.addObjectsToMap(this.level.pufferfishes);
@@ -238,7 +245,15 @@ class World {
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.throwableObjects);
+
     this.ctx.translate(-this.camera_x, 0);
+    // ----- Space for fixed objects -----
+    this.addToMap(this.healthBar);
+    this.addToMap(this.coinBar);
+    this.addToMap(this.bottleBar);
+    if (this.endboss.firstContactEndboss) {
+      this.addToMap(this.endbossHealthBar);
+    }
 
     let self = this;
     requestAnimationFrame(function () {
