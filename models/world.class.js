@@ -70,7 +70,10 @@ class World {
 
   checkCollisionsWithEndboss() {
     if (this.character.isCollidingWithEndboss(this.endboss)) {
-      this.damageCharacter();
+      this.endboss.isEndbossAttacking();
+      setTimeout(() => {
+        this.damageCharacter();
+      }, 1000);
     }
   }
 
@@ -83,7 +86,7 @@ class World {
   }
 
   endbossFollowCharacter() {
-    if (this.endboss.firstContactEndboss) {
+    if (this.endboss.firstContactEndboss && this.endboss.following) {
       let desiredY = this.character.y - this.character.height;
 
       let distanceX = this.character.x - this.endboss.x;
@@ -120,8 +123,15 @@ class World {
     setInterval(() => {
       this.throwableObjects.forEach((bubble, shotBubble) => {
         if (bubble.isBubbleCollidingWithEndboss(this.endboss)) {
-          if (!this.endboss.madEndboss) {
+          if (
+            !this.endboss.madEndboss &&
+            this.throwableObjects[shotBubble].bubbleType == "normal"
+          ) {
             this.endboss.isMadEndboss();
+          }
+          if (this.throwableObjects[shotBubble].bubbleType == "toxic") {
+            this.endboss.hit(20);
+            this.endbossHealthBar.setPercentage(this.endboss.health);
           }
           this.removeShotBubble(shotBubble);
         }
@@ -130,7 +140,7 @@ class World {
   }
 
   damageCharacter() {
-    this.character.hit();
+    this.character.hit(5);
     this.healthBar.setPercentage(this.character.health);
   }
 
@@ -171,7 +181,8 @@ class World {
       this.character.x + 160,
       this.character.y + 100,
       this.character.otherDirection,
-      "img/1.Sharkie/4.Attack/Bubble trap/Bubble.png"
+      "img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",
+      "normal"
     );
     this.throwableObjects.push(bubble);
   }
@@ -181,7 +192,8 @@ class World {
       this.character.x + 160,
       this.character.y + 100,
       this.character.otherDirection,
-      "img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png"
+      "img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png",
+      "toxic"
     );
     this.throwableObjects.push(bubble);
   }

@@ -1,9 +1,10 @@
 class ThrowableObject extends MoveableObject {
-  constructor(x, y, otherDirection, img) {
+  constructor(x, y, otherDirection, img, bubbleType) {
     super().loadImg(img);
     this.x = x;
     this.y = y;
     this.characterFacingLeft = otherDirection;
+    this.bubbleType = bubbleType;
     this.height = 30;
     this.width = 30;
 

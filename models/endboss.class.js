@@ -56,6 +56,7 @@ class Endboss extends MoveableObject {
   offsetX = 80;
   y = 1000;
   madEndboss = false;
+  following = false;
   attacking = false;
 
   constructor() {
@@ -72,23 +73,64 @@ class Endboss extends MoveableObject {
 
   animate() {
     let i = 0;
+    this.currentImg = 0;
     setInterval(() => {
       if (this.firstContactEndboss && i < 10) {
         this.playAnimation(this.IMAGES_INTRO);
         this.y = -50;
-      }
-      if (this.madEndboss) {
+        this.following = true;
+        i++;
+      } else if (this.madEndboss) {
         this.playAnimation(this.IMAGES_ATTACKING);
-
         setTimeout(() => {
           this.madEndboss = false;
-        }, 1000);
+        }, 200);
+      } else if (this.attacking) {
+        this.playAnimation(this.IMAGES_ATTACKING);
+      } else if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
+      } else if (this.isDead()) {
+        this.following = false;
+        this.playAnimation(this.IMAGES_DEAD);
+        setTimeout(() => {
+          this.deadEndboss();
+        }, 500);
       } else {
         this.playAnimation(this.IMAGES_SWIMMING);
       }
-      if (this.firstContactEndboss) {
-        i++;
-      }
     }, 200);
+  }
+
+  isEndbossAttacking() {
+    this.attacking = true;
+    setTimeout(() => {
+      this.attacking = false;
+    }, 1000);
+  }
+
+  deadEndboss() {
+    this.currentImg = 5;
+    this.startSinking();
+  }
+
+  startSinking() {
+    setInterval(() => {
+      this.sinkToBottom();
+    }, 200);
+  }
+
+  sinkToBottom() {
+    this.y += 5;
+    if (this.floatDirection === "right") {
+      this.x += 5;
+      setTimeout(() => {
+        this.floatDirection = "left";
+      }, 50);
+    } else {
+      this.x -= 5;
+      setTimeout(() => {
+        this.floatDirection = "right";
+      }, 50);
+    }
   }
 }
