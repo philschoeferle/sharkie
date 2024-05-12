@@ -13,6 +13,7 @@ class MoveableObject extends DrawableObject {
   deadPufferfish = false;
   madPufferfish = false;
   firstContactEndboss = false;
+  invulnerable = false;
 
   applyGravity() {
     setInterval(() => {
@@ -90,6 +91,13 @@ class MoveableObject extends DrawableObject {
     } else {
       this.bottlesAmountFull = true;
     }
+  }
+
+  invulnerableAfterDamage() {
+    this.invulnerable = true;
+    setTimeout(() => {
+      this.invulnerable = false;
+    }, 2000);
   }
 
   isHurt() {

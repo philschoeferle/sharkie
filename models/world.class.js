@@ -129,9 +129,13 @@ class World {
           ) {
             this.endboss.isMadEndboss();
           }
-          if (this.throwableObjects[shotBubble].bubbleType == "toxic") {
+          if (
+            !this.endboss.invulnerable &&
+            this.throwableObjects[shotBubble].bubbleType == "toxic"
+          ) {
             this.endboss.hit(20);
             this.endbossHealthBar.setPercentage(this.endboss.health);
+            this.endboss.invulnerableAfterDamage();
           }
           this.removeShotBubble(shotBubble);
         }
