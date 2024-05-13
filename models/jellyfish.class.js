@@ -11,6 +11,12 @@ class Jellyfish extends MoveableObject {
     "img/2.Enemy/2 Jelly fish/Dead/Lila/L3.png",
     "img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png",
   ];
+  IMAGES_DANGEROUS = [
+    "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png",
+    "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png",
+    "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png",
+    "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png",
+  ];
 
   height = 70;
   width = 100;
@@ -25,6 +31,7 @@ class Jellyfish extends MoveableObject {
 
     this.loadImgs(this.IMAGES_SWIMMING);
     this.loadImgs(this.IMAGES_DEAD);
+    this.loadImgs(this.IMAGES_DANGEROUS);
     this.animate();
   }
 
@@ -51,6 +58,11 @@ class Jellyfish extends MoveableObject {
     if (this.deadJellyfish) {
       this.playAnimation(this.IMAGES_DEAD);
       this.startFloating();
+    } else if (this.collidingWithJellyfish) {
+      this.playAnimation(this.IMAGES_DANGEROUS);
+      setTimeout(() => {
+        this.collidingWithJellyfish = false;
+      }, 3000);
     } else {
       this.playAnimation(this.IMAGES_SWIMMING);
     }

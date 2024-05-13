@@ -24,7 +24,7 @@ class Pufferfish extends MoveableObject {
 
   height = 60;
   width = 60;
-  y = 80;
+  swimDirection = "left";
 
   constructor() {
     super().loadImg(
@@ -32,7 +32,8 @@ class Pufferfish extends MoveableObject {
     );
 
     this.x = 700 + Math.random() * 500;
-    this.speed = 0.15 + Math.random() * 0.25;
+    this.y = 50 + Math.random() * 300;
+    this.speed = 3 + Math.random() * 0.25;
 
     this.loadImgs(this.IMAGES_SWIMMING);
     this.loadImgs(this.IMAGES_DEAD);
@@ -42,9 +43,17 @@ class Pufferfish extends MoveableObject {
   }
 
   animate() {
-    /* setInterval(() => {
-      this.moveLeft();
-    }, 1000 / 60); */
+    setInterval(() => {
+      if (this.swimDirection === "left" && this.x > 50) {
+        this.moveLeft();
+        this.otherDirection = false;
+      } else if (this.swimDirection === "right" && this.x < 1800) {
+        this.moveRight();
+        this.otherDirection = true;
+      } else {
+        this.swimDirection = this.swimDirection === "left" ? "right" : "left";
+      }
+    }, 1000 / 60);
 
     setInterval(() => {
       this.setPufferfishAnimation();
@@ -59,13 +68,14 @@ class Pufferfish extends MoveableObject {
       this.playAnimation(this.IMAGES_ATTACKING_SWIMMING);
       setTimeout(() => {
         this.madPufferfish = false;
-      }, 5000);
+      }, 3000);
     } else {
       this.playAnimation(this.IMAGES_SWIMMING);
     }
   }
 
   startShrinking() {
+    this.speed = 0;
     this.x += 5;
     this.y += 5;
     this.height -= 10;

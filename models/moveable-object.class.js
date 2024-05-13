@@ -9,6 +9,7 @@ class MoveableObject extends DrawableObject {
   speedY = 0;
   acceleration = 0.01;
   lastHit = 0;
+  collidingWithJellyfish = false;
   deadJellyfish = false;
   deadPufferfish = false;
   madPufferfish = false;
@@ -93,6 +94,13 @@ class MoveableObject extends DrawableObject {
     }
   }
 
+  reducePercentageBottles() {
+    if (this.bottles > 0) {
+      this.bottles--;
+      this.bottlesAmountFull = false;
+    }
+  }
+
   invulnerableAfterDamage() {
     this.invulnerable = true;
     setTimeout(() => {
@@ -108,6 +116,10 @@ class MoveableObject extends DrawableObject {
 
   isHurtJellyfish() {
     this.deadJellyfish = true;
+  }
+
+  isDangerousJellyfish() {
+    this.collidingWithJellyfish = true;
   }
 
   isHurtPufferfish() {

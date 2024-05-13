@@ -45,6 +45,7 @@ class World {
   checkCollisionsWithJellyfish() {
     this.level.jellyfishes.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
+        enemy.isDangerousJellyfish();
         this.damageCharacter();
       }
     });
@@ -58,6 +59,7 @@ class World {
         !enemy.deadPufferfish
       ) {
         this.damageCharacter();
+        enemy.isMadPufferfish();
       }
       if (this.character.isColliding(enemy) && this.character.attacking) {
         this.removeHitPufferfish(hitPufferfish);
@@ -200,6 +202,8 @@ class World {
       "toxic"
     );
     this.throwableObjects.push(bubble);
+    this.character.reducePercentageBottles();
+    this.bottleBar.setPercentageBottles(this.character.bottles);
   }
 
   checkBubbleCollisionsWithJellyfish() {

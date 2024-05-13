@@ -178,7 +178,7 @@ class Character extends MoveableObject {
     }, 150);
 
     setInterval(() => {
-      if (this.world.keyboard.D || this.world.keyboard.S) {
+      if (this.world.keyboard.D || this.world.keyboard.S && this.bottles > 0) {
         this.idleCounter = 0;
         this.activateAttack();
         this.playAnimation(this.IMAGES_ATTACK_BUBBLE);
