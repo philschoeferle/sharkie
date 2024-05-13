@@ -33,7 +33,9 @@ class DrawableObject {
     if (
       this instanceof Character ||
       this instanceof Jellyfish ||
-      this instanceof Pufferfish ||
+      this instanceof PufferfishRed ||
+      this instanceof PufferfishGreen ||
+      this instanceof PufferfishOrange ||
       this instanceof Endboss
     ) {
       ctx.beginPath();

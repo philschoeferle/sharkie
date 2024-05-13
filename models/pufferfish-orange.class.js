@@ -1,26 +1,26 @@
-class Pufferfish extends MoveableObject {
+class PufferfishOrange extends MoveableObject {
   IMAGES_SWIMMING = [
-    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim2.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim3.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim4.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim5.png",
   ];
   IMAGES_ATTACKING = [
-    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition1.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition2.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition3.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition4.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/3.transition5.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition1.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition2.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition3.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition4.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/2.transition/2.transition5.png",
   ];
   IMAGES_ATTACKING_SWIMMING = [
-    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim1.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim2.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim3.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim4.png",
-    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim5.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim1.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim2.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim3.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim4.png",
+    "img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim5.png",
   ];
-  IMAGES_DEAD = ["img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png"];
+  IMAGES_DEAD = ["img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.png"];
 
   height = 60;
   width = 60;
@@ -31,9 +31,9 @@ class Pufferfish extends MoveableObject {
       "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png"
     );
 
-    this.x = 700 + Math.random() * 500;
+    this.x = 500 + Math.random() * 1000;
     this.y = 50 + Math.random() * 300;
-    this.speed = 3 + Math.random() * 0.25;
+    this.speed = 0.3 + Math.random() * 3;
 
     this.loadImgs(this.IMAGES_SWIMMING);
     this.loadImgs(this.IMAGES_DEAD);
