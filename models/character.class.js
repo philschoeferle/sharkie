@@ -49,13 +49,18 @@ class Character extends MoveableObject {
     "img/1.Sharkie/2.Long_IDLE/I13.png",
     "img/1.Sharkie/2.Long_IDLE/I14.png",
   ];
-  IMAGES_HURT = [
+  IMAGES_HURT_TOXIC = [
     "img/1.Sharkie/5.Hurt/1.Poisoned/1.png",
     "img/1.Sharkie/5.Hurt/1.Poisoned/2.png",
     "img/1.Sharkie/5.Hurt/1.Poisoned/3.png",
     "img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
   ];
-  IMAGES_DEAD = [
+  IMAGES_HURT_ELECTRIC = [
+    "img/1.Sharkie/5.Hurt/2.Electric shock/1.png",
+    "img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
+    "img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
+  ];
+  IMAGES_DEAD_TOXIC = [
     "img/1.Sharkie/6.dead/1.Poisoned/1.png",
     "img/1.Sharkie/6.dead/1.Poisoned/2.png",
     "img/1.Sharkie/6.dead/1.Poisoned/3.png",
@@ -66,8 +71,18 @@ class Character extends MoveableObject {
     "img/1.Sharkie/6.dead/1.Poisoned/8.png",
     "img/1.Sharkie/6.dead/1.Poisoned/9.png",
     "img/1.Sharkie/6.dead/1.Poisoned/10.png",
-    "img/1.Sharkie/6.dead/1.Poisoned/11.png",
-    "img/1.Sharkie/6.dead/1.Poisoned/12.png",
+  ];
+  IMAGES_DEAD_ELECTRIC = [
+    "img/1.Sharkie/6.dead/2.Electro_shock/1.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/2.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/3.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/4.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/5.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/6.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/7.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/8.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/9.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/10.png",
   ];
   IMAGES_ATTACK_BUBBLE = [
     "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/1.png",
@@ -108,8 +123,10 @@ class Character extends MoveableObject {
     this.loadImgs(this.IMAGES_IDLE_LONG_SLEEP);
     this.loadImgs(this.IMAGES_ATTACK_BUBBLE);
     this.loadImgs(this.IMAGES_ATTACK_SLAP);
-    this.loadImgs(this.IMAGES_HURT);
-    this.loadImgs(this.IMAGES_DEAD);
+    this.loadImgs(this.IMAGES_HURT_TOXIC);
+    this.loadImgs(this.IMAGES_HURT_ELECTRIC);
+    this.loadImgs(this.IMAGES_DEAD_TOXIC);
+    this.loadImgs(this.IMAGES_DEAD_ELECTRIC);
     this.animate();
   }
 
@@ -158,10 +175,21 @@ class Character extends MoveableObject {
 
     setInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
+        if (this.collidingWithJellyfish) {
+          this.playAnimation(this.IMAGES_DEAD_ELECTRIC);
+        } else {
+          this.playAnimation(this.IMAGES_DEAD_TOXIC);
+        }
         this.idleCounter = 0;
       } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
+        if (this.collidingWithJellyfish) {
+          this.playAnimation(this.IMAGES_HURT_ELECTRIC);
+          setTimeout(() => {
+            this.collidingWithJellyfish = false;
+          }, 1000);
+        } else {
+          this.playAnimation(this.IMAGES_HURT_TOXIC);
+        }
         this.idleCounter = 0;
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_SWIMMING);
@@ -178,7 +206,10 @@ class Character extends MoveableObject {
     }, 150);
 
     setInterval(() => {
-      if (this.world.keyboard.D || this.world.keyboard.S && this.bottles > 0) {
+      if (
+        this.world.keyboard.D ||
+        (this.world.keyboard.S && this.bottles > 0)
+      ) {
         this.idleCounter = 0;
         this.activateAttack();
         this.playAnimation(this.IMAGES_ATTACK_BUBBLE);
@@ -244,5 +275,13 @@ class Character extends MoveableObject {
       this.attacking = false;
       this.world.keyboard.SPACE = false;
     }, 500);
+  }
+
+  updateCollidingWithJellyfish(colliding) {
+    this.collidingWithJellyfish = colliding;
+  }
+
+  deadCharacter() {
+    this.currentImg = 10;
   }
 }

@@ -1,5 +1,16 @@
 const level1 = new Level(
-  [new Jellyfish(), new Jellyfish(), new Jellyfish()],
+  [
+    new JellyfishYellow(),
+    new JellyfishYellow(),
+    new JellyfishYellow(),
+    new JellyfishYellow(),
+    new JellyfishYellow(),
+    new JellyfishLila(),
+    new JellyfishLila(),
+    new JellyfishLila(),
+    new JellyfishLila(),
+    new JellyfishLila(),
+  ],
   [new PufferfishRed(), new PufferfishGreen(), new PufferfishOrange()],
   [new Light()],
   [

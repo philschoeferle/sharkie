@@ -1,11 +1,11 @@
-class Jellyfish extends MoveableObject {
+class JellyfishLila extends MoveableObject {
   IMAGES_SWIMMING = [
     "img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png",
     "img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png",
     "img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png",
     "img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png",
   ];
-  IMAGES_DEAD = [
+  IMAGES_REGULAR_DEAD = [
     "img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png",
     "img/2.Enemy/2 Jelly fish/Dead/Lila/L2.png",
     "img/2.Enemy/2 Jelly fish/Dead/Lila/L3.png",
@@ -16,6 +16,12 @@ class Jellyfish extends MoveableObject {
     "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png",
     "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png",
     "img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png",
+  ];
+  IMAGES_DANGEROUS_DEAD = [
+    "img/2.Enemy/2 Jelly fish/Dead/Pink/P1.png",
+    "img/2.Enemy/2 Jelly fish/Dead/Pink/P2.png",
+    "img/2.Enemy/2 Jelly fish/Dead/Pink/P3.png",
+    "img/2.Enemy/2 Jelly fish/Dead/Pink/P4.png",
   ];
 
   height = 70;
@@ -30,8 +36,9 @@ class Jellyfish extends MoveableObject {
     this.speed = 0.5 + Math.random() * 0.25;
 
     this.loadImgs(this.IMAGES_SWIMMING);
-    this.loadImgs(this.IMAGES_DEAD);
+    this.loadImgs(this.IMAGES_REGULAR_DEAD);
     this.loadImgs(this.IMAGES_DANGEROUS);
+    this.loadImgs(this.IMAGES_DANGEROUS_DEAD);
     this.animate();
   }
 
@@ -56,7 +63,11 @@ class Jellyfish extends MoveableObject {
 
   setJellyfishAnimation() {
     if (this.deadJellyfish) {
-      this.playAnimation(this.IMAGES_DEAD);
+      if (this.collidingWithJellyfish) {
+        this.playAnimation(this.IMAGES_DANGEROUS_DEAD);
+      } else {
+        this.playAnimation(this.IMAGES_REGULAR_DEAD);
+      }
       this.startFloating();
     } else if (this.collidingWithJellyfish) {
       this.playAnimation(this.IMAGES_DANGEROUS);

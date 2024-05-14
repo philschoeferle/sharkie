@@ -33,7 +33,7 @@ class PufferfishOrange extends MoveableObject {
 
     this.x = 500 + Math.random() * 1000;
     this.y = 50 + Math.random() * 300;
-    this.speed = 0.3 + Math.random() * 3;
+    this.speed = 0.5 + Math.random() * 3;
 
     this.loadImgs(this.IMAGES_SWIMMING);
     this.loadImgs(this.IMAGES_DEAD);
@@ -44,10 +44,13 @@ class PufferfishOrange extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      if (this.swimDirection === "left" && this.x > 50) {
+      if (this.swimDirection === "left" && this.x > 100 + Math.random() * 300) {
         this.moveLeft();
         this.otherDirection = false;
-      } else if (this.swimDirection === "right" && this.x < 1800) {
+      } else if (
+        this.swimDirection === "right" &&
+        this.x < 1500 + Math.random() * 150
+      ) {
         this.moveRight();
         this.otherDirection = true;
       } else {

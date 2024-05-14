@@ -33,9 +33,9 @@ class PufferfishGreen extends MoveableObject {
       "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png"
     );
 
-    this.x = 500 + Math.random() * 1000;
+    this.x = 500 + Math.random() * 300;
     this.y = 50 + Math.random() * 300;
-    this.speed = 0.3 + Math.random() * 3;
+    this.speed = 0.5 + Math.random() * 3;
 
     this.loadImgs(this.IMAGES_SWIMMING);
     this.loadImgs(this.IMAGES_DEAD);
@@ -46,10 +46,13 @@ class PufferfishGreen extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      if (this.swimDirection === "left" && this.x > 50) {
+      if (this.swimDirection === "left" && this.x > 500 + Math.random() * 300) {
         this.moveLeft();
         this.otherDirection = false;
-      } else if (this.swimDirection === "right" && this.x < 1800) {
+      } else if (
+        this.swimDirection === "right" &&
+        this.x < 1000 + Math.random() * 500
+      ) {
         this.moveRight();
         this.otherDirection = true;
       } else {

@@ -47,6 +47,7 @@ class World {
       if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
         enemy.isDangerousJellyfish();
         this.damageCharacter();
+        this.character.updateCollidingWithJellyfish(true);
       }
     });
   }
