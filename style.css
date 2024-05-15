@@ -1,10 +1,20 @@
+@font-face {
+  font-family: "LuckiestGuy";
+  src: url("img/5.Font/Luckiest_Guy/LuckiestGuy-Regular.ttf") format("truetype");
+}
+
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("img/3. Background/Legacy/Dark/1.png");
+  font-family: "LuckiestGuy", sans-serif;
 }
 
 canvas {
-    background-color: black;
+  background-color: black;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 0 white;
 }

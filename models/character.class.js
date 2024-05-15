@@ -113,6 +113,7 @@ class Character extends MoveableObject {
   speed = 3;
   idleCounter = 0;
   attacking = false;
+  isDeadCharacter = false;
   world;
 
   constructor() {
@@ -175,12 +176,7 @@ class Character extends MoveableObject {
 
     setInterval(() => {
       if (this.isDead()) {
-        if (this.collidingWithJellyfish) {
-          this.playAnimation(this.IMAGES_DEAD_ELECTRIC);
-        } else {
-          this.playAnimation(this.IMAGES_DEAD_TOXIC);
-        }
-        this.idleCounter = 0;
+        this.deadCharacter();
       } else if (this.isHurt()) {
         if (this.collidingWithJellyfish) {
           this.playAnimation(this.IMAGES_HURT_ELECTRIC);
@@ -282,6 +278,18 @@ class Character extends MoveableObject {
   }
 
   deadCharacter() {
-    this.currentImg = 10;
+    this.deadCharacterAnimation();
+    this.isDeadCharacter = true;
+  }
+
+  deadCharacterAnimation() {
+    if (this.collidingWithJellyfish) {
+      this.playAnimation(this.IMAGES_DEAD_ELECTRIC);
+    } else {
+      this.playAnimation(this.IMAGES_DEAD_TOXIC);
+    }
+    setTimeout(() => {
+      this.currentImg = 9;
+    }, 800);
   }
 }

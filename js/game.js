@@ -54,3 +54,10 @@ window.addEventListener("keyup", (e) => {
     keyboard.S = false;
   }
 });
+
+function clearAllIntervals() {
+  let highestTimeoutId = setInterval(";");
+  for (var i = 0; i < highestTimeoutId; i++) {
+    clearInterval(i);
+  }
+}

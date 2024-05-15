@@ -29,6 +29,7 @@ class World {
 
   run() {
     setInterval(() => {
+      this.checkGameStatus();
       this.checkCollisionsWithJellyfish();
       this.checkCollisionsWithPufferfish();
       this.checkCollisionsWithEndboss();
@@ -40,6 +41,11 @@ class World {
       this.checkContactWithEndboss();
       this.endbossFollowCharacter();
     }, 200);
+  }
+
+  checkGameStatus() {
+    if (this.character.isDeadCharacter) {
+    }
   }
 
   checkCollisionsWithJellyfish() {
