@@ -18,3 +18,51 @@ canvas {
   border-radius: 10px;
   box-shadow: 0 0 6px 0 white;
 }
+
+.d-none {
+  display: none;
+}
+
+.start-screen {
+  position: relative;
+  height: 480px;
+  width: 720px;
+  background-image: url("img/3. Background/Mesa de trabajo 1.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 0 white;
+}
+
+.start-button {
+  position: absolute;
+  height: 50px;
+  width: 160px;
+  right: 140px;
+  bottom: 80px;
+  cursor: pointer;
+}
+
+.start-screen-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  padding: 16px;
+}
+
+.menu-icons {
+  border: 2px solid transparent;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.menu-icons:hover {
+  border: 2px solid rgba(188, 242, 255, 1);
+  border-radius: 5px;
+  background-color: rgba(188, 242, 255, 1);
+  box-shadow: 0 0 6px 0 rgb(188, 242, 255);
+}

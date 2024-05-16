@@ -31,6 +31,39 @@
   </head>
   <body onload="init()">
     <h1>Sharkie</h1>
-    <canvas id="canvas" width="720px" height="480px"></canvas>
+    <canvas id="canvas" class="d-none" width="720px" height="480px"></canvas>
+    <div class="start-screen">
+      <img
+        class="start-button"
+        src="img/6.Botones/Start/1.png"
+        alt="start button"
+      />
+      <div class="start-screen-menu">
+        <div onclick="toggleVolume()">
+          <img
+            id="volume-img"
+            class="menu-icons"
+            src="img/6.Botones/Menu/volume-off.png"
+            alt="volume icon"
+          />
+        </div>
+        <div onclick="toggleInstructions()">
+          <img
+            id="instructions-img"
+            class="menu-icons"
+            src="img/6.Botones/Menu/instruction-open.png"
+            alt="instruction icon"
+          />
+        </div>
+        <div onclick="toggleFullscreen()">
+          <img
+            id="fullscreen-img"
+            class="menu-icons"
+            src="img/6.Botones/Menu/fullscreen-open.png"
+            alt="fullscreen icon"
+          />
+        </div>
+      </div>
+    </div>
   </body>
 </html>
