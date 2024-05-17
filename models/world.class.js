@@ -44,12 +44,18 @@ class World {
     }, 200);
   }
 
+  updateMutedSounds(muted) {
+    this.mutedSounds = muted;
+  }
+
   checkGameStatus() {
     if (this.character.isDeadCharacter) {
     } else {
       if (!this.mutedSounds) {
         sounds.background_audio.volume = 0.25;
         sounds.background_audio.play();
+      } else {
+        sounds.background_audio.pause();
       }
     }
   }

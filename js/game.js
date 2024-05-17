@@ -76,6 +76,10 @@ function showGame() {
   ingameMenu.classList.remove("d-none");
 }
 
+function backToStart() {
+  window.location.reload();
+}
+
 function toggleGameRunning() {
   let gameRunningImg = document.getElementById("game-running-img");
 
@@ -87,14 +91,24 @@ function toggleGameRunning() {
 }
 
 function toggleVolume() {
-  let volumeImg = document.getElementById("volume-img");
+  let volumeImgStart = document.getElementById("volume-img-start");
+  let volumeImgIngame = document.getElementById("volume-img-ingame");
 
-  if (volumeImg.src.includes("volume-off.png")) {
-    volumeImg.src = "img/6.Botones/Menu/volume-on.png";
+  if (volumeImgStart.src.includes("volume-off.png")) {
+    volumeImgStart.src = "img/6.Botones/Menu/volume-on.png";
+    volumeImgIngame.src = "img/6.Botones/Menu/volume-on.png";
     mutedSounds = false;
   } else {
-    volumeImg.src = "img/6.Botones/Menu/volume-off.png";
+    volumeImgStart.src = "img/6.Botones/Menu/volume-off.png";
+    volumeImgIngame.src = "img/6.Botones/Menu/volume-off.png";
     mutedSounds = true;
+  }
+  setToggledVolume();
+}
+
+function setToggledVolume() {
+  if (world) {
+    world.updateMutedSounds(mutedSounds);
   }
 }
 
@@ -109,12 +123,15 @@ function toggleInstructions() {
 }
 
 function toggleFullscreen() {
-  let fullscreenImg = document.getElementById("fullscreen-img");
+  let fullscreenImgStart = document.getElementById("fullscreen-img-start");
+  let fullscreenImgIngame = document.getElementById("fullscreen-img-ingame");
 
-  if (fullscreenImg.src.includes("fullscreen-open.png")) {
-    fullscreenImg.src = "img/6.Botones/Menu/fullscreen-close.png";
+  if (fullscreenImgStart.src.includes("fullscreen-open.png")) {
+    fullscreenImgStart.src = "img/6.Botones/Menu/fullscreen-close.png";
+    fullscreenImgIngame.src = "img/6.Botones/Menu/fullscreen-close.png";
   } else {
-    fullscreenImg.src = "img/6.Botones/Menu/fullscreen-open.png";
+    fullscreenImgStart.src = "img/6.Botones/Menu/fullscreen-open.png";
+    fullscreenImgIngame.src = "img/6.Botones/Menu/fullscreen-open.png";
   }
 }
 

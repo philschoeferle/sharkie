@@ -33,9 +33,17 @@
     <div class="header">
       <h1>Sharkie</h1>
       <div id="ingame-menu" class="ingame-menu d-none">
+        <div onclick="backToStart()">
+          <img
+            id="home-img"
+            class="ingame-menu-icons"
+            src="img/6.Botones/Menu/home.png"
+            alt="home icon"
+          />
+        </div>
         <div onclick="toggleVolume()">
           <img
-            id="volume-img"
+            id="volume-img-ingame"
             class="ingame-menu-icons"
             src="img/6.Botones/Menu/volume-off.png"
             alt="volume icon"
@@ -51,7 +59,7 @@
         </div>
         <div onclick="toggleFullscreen()">
           <img
-            id="fullscreen-img"
+            id="fullscreen-img-start"
             class="ingame-menu-icons"
             src="img/6.Botones/Menu/fullscreen-open.png"
             alt="fullscreen icon"
@@ -70,7 +78,7 @@
       <div class="start-screen-menu">
         <div onclick="toggleVolume()">
           <img
-            id="volume-img"
+            id="volume-img-start"
             class="menu-icons"
             src="img/6.Botones/Menu/volume-off.png"
             alt="volume icon"
@@ -86,7 +94,7 @@
         </div>
         <div onclick="toggleFullscreen()">
           <img
-            id="fullscreen-img"
+            id="fullscreen-img-ingame"
             class="menu-icons"
             src="img/6.Botones/Menu/fullscreen-open.png"
             alt="fullscreen icon"
