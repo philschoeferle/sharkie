@@ -13,10 +13,11 @@ class World {
   endbossHealthBar = new EndbossHealthBar();
   throwableObjects = [];
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, mutedSounds) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.mutedSounds = mutedSounds;
     this.draw();
     this.setWorld();
     this.run();
@@ -45,6 +46,11 @@ class World {
 
   checkGameStatus() {
     if (this.character.isDeadCharacter) {
+    } else {
+      if (!this.mutedSounds) {
+        sounds.background_audio.volume = 0.25;
+        sounds.background_audio.play();
+      }
     }
   }
 

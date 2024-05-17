@@ -12,6 +12,12 @@ body {
   font-family: "LuckiestGuy", sans-serif;
 }
 
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 canvas {
   background-color: black;
   border: 3px solid white;
@@ -20,7 +26,7 @@ canvas {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 .start-screen {
@@ -43,6 +49,17 @@ canvas {
   right: 140px;
   bottom: 80px;
   cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  height: 60px;
+  width: 180px;
+  right: 130px;
+  bottom: 75px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px 0 rgb(255, 255, 255);
 }
 
 .start-screen-menu {
@@ -61,6 +78,30 @@ canvas {
 }
 
 .menu-icons:hover {
+  border: 2px solid rgba(188, 242, 255, 1);
+  border-radius: 5px;
+  background-color: rgba(188, 242, 255, 1);
+  box-shadow: 0 0 6px 0 rgb(188, 242, 255);
+}
+
+.ingame-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  gap: 20px;
+  padding: 16px;
+  right: -300px;
+}
+
+.ingame-menu-icons {
+  border: 2px solid transparent;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.ingame-menu-icons:hover {
   border: 2px solid rgba(188, 242, 255, 1);
   border-radius: 5px;
   background-color: rgba(188, 242, 255, 1);

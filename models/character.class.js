@@ -103,7 +103,6 @@ class Character extends MoveableObject {
     "img/1.Sharkie/4.Attack/Fin slap/7.png",
     "img/1.Sharkie/4.Attack/Fin slap/8.png",
   ];
-  swimming_sound = new Audio("audio/swim.mp3");
 
   width = 200;
   height = 200;
@@ -133,7 +132,7 @@ class Character extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      this.swimming_sound.pause();
+      sounds.swim_audio.pause();
       if (this.world.keyboard.UP && this.y > -80) {
         this.y -= this.speed;
       }
@@ -143,12 +142,12 @@ class Character extends MoveableObject {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
-        this.swimming_sound.play();
+        sounds.swim_audio.play();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
         this.otherDirection = true;
-        this.swimming_sound.play();
+        sounds.swim_audio.play();
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
@@ -225,9 +224,11 @@ class Character extends MoveableObject {
       this.currentImg = 0;
       if (this.world.keyboard.D) {
         this.activateShootNormalBubble();
+        sounds.bubble_shoot.play();
       }
       if (this.world.keyboard.S) {
         this.activateShootToxicBubble();
+        sounds.bubble_shoot.play();
       }
       if (this.world.keyboard.SPACE) {
         this.activateSlapAttack();
