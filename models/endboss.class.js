@@ -87,8 +87,10 @@ class Endboss extends MoveableObject {
         }, 200);
       } else if (this.attacking) {
         this.playAnimation(this.IMAGES_ATTACKING);
+        this.playEndbossBiteSound();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
+        this.playEndbossHurtSound();
       } else if (this.isDead()) {
         this.following = false;
         this.playAnimation(this.IMAGES_DEAD);
@@ -98,6 +100,7 @@ class Endboss extends MoveableObject {
       } else {
         this.playAnimation(this.IMAGES_SWIMMING);
       }
+      this.playEndbossThemeSound();
     }, 200);
   }
 
@@ -131,6 +134,33 @@ class Endboss extends MoveableObject {
       setTimeout(() => {
         this.floatDirection = "right";
       }, 50);
+    }
+  }
+
+  playEndbossThemeSound() {
+    if (!this.mutedSounds && this.firstContactEndboss) {
+      sounds.background_audio.pause();
+      sounds.endboss_fight_audio.volume = 0.05;
+      sounds.endboss_fight_audio.play();
+    }
+  }
+
+  playEndbossBiteSound() {
+    if (!this.mutedSounds) {
+      sounds.endboss_bite_audio.play();
+    }
+  }
+
+  playEndbossHurtSound() {
+    if (!this.mutedSounds) {
+      sounds.endboss_hurt_audio.volume = 0.3;
+      sounds.endboss_hurt_audio.play();
+    }
+  }
+
+  playBiteSound() {
+    if (!this.mutedSounds) {
+      sounds.endboss_bite_audio.play();
     }
   }
 }

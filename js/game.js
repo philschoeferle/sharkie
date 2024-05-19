@@ -7,10 +7,18 @@ function init() {
   canvas = document.getElementById("canvas");
   sounds = {
     background_audio: new Audio("audio/background-hiphop-beat.mp3"),
-    bubble_pop: new Audio("audio/bubble-pop.mp3"),
-    bubble_shoot: new Audio("audio/bubble-shoot.mp3"),
-    collect_bubble: new Audio("audio/collect-bottle.mp3"),
-    collect_coin: new Audio("audio/collect-coin.mp3"),
+    bubble_pop_audio: new Audio("audio/bubble-pop.mp3"),
+    bubble_shoot_audio: new Audio("audio/bubble-shoot.mp3"),
+    collect_bubble_audio: new Audio("audio/collect-bottle.mp3"),
+    collect_coin_audio: new Audio("audio/collect-coin.mp3"),
+    endboss_bite_audio: new Audio("audio/endboss-bite.mp3"),
+    endboss_fight_audio: new Audio("audio/endboss-fight.mp3"),
+    endboss_hurt_audio: new Audio("audio/hurt.mp3"),
+    fin_slap_audio: new Audio("audio/fin-slap.mp3"),
+    game_over_audio: new Audio("audio/game-over.mp3"),
+    game_won_audio: new Audio("audio/game-won.mp3"),
+    hurt_audio: new Audio("audio/hurt.mp3"),
+    hurt_electric_audio: new Audio("audio/hurt-electric.mp3"),
     swim_audio: new Audio("audio/swim.mp3"),
   };
   world = new World(canvas, keyboard, mutedSounds);

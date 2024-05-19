@@ -142,12 +142,12 @@ class Character extends MoveableObject {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
-        sounds.swim_audio.play();
+        this.playSwimSound();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
         this.otherDirection = true;
-        sounds.swim_audio.play();
+        this.playSwimSound();
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
@@ -177,14 +177,7 @@ class Character extends MoveableObject {
       if (this.isDead()) {
         this.deadCharacter();
       } else if (this.isHurt()) {
-        if (this.collidingWithJellyfish) {
-          this.playAnimation(this.IMAGES_HURT_ELECTRIC);
-          setTimeout(() => {
-            this.collidingWithJellyfish = false;
-          }, 1000);
-        } else {
-          this.playAnimation(this.IMAGES_HURT_TOXIC);
-        }
+        this.hurtCharacterAnimation();
         this.idleCounter = 0;
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_SWIMMING);
@@ -224,11 +217,9 @@ class Character extends MoveableObject {
       this.currentImg = 0;
       if (this.world.keyboard.D) {
         this.activateShootNormalBubble();
-        sounds.bubble_shoot.play();
       }
       if (this.world.keyboard.S) {
         this.activateShootToxicBubble();
-        sounds.bubble_shoot.play();
       }
       if (this.world.keyboard.SPACE) {
         this.activateSlapAttack();
@@ -246,6 +237,7 @@ class Character extends MoveableObject {
       this.attacking = false;
       this.world.keyboard.D = false;
       this.world.shootNormalBubble();
+      this.playBubbleShootSound();
     }, 500);
   }
 
@@ -259,6 +251,7 @@ class Character extends MoveableObject {
       this.attacking = false;
       this.world.keyboard.S = false;
       this.world.shootToxicBubble();
+      this.playBubbleShootSound();
     }, 500);
   }
 
@@ -271,11 +264,25 @@ class Character extends MoveableObject {
       clearInterval(keySPACEIsPressed);
       this.attacking = false;
       this.world.keyboard.SPACE = false;
+      this.playFinSlapSound();
     }, 500);
   }
 
   updateCollidingWithJellyfish(colliding) {
     this.collidingWithJellyfish = colliding;
+  }
+
+  hurtCharacterAnimation() {
+    if (this.collidingWithJellyfish) {
+      this.playAnimation(this.IMAGES_HURT_ELECTRIC);
+      setTimeout(() => {
+        this.collidingWithJellyfish = false;
+      }, 1000);
+      this.playHurtElectricSound();
+    } else {
+      this.playAnimation(this.IMAGES_HURT_TOXIC);
+      this.playHurtNormalSound();
+    }
   }
 
   deadCharacter() {
@@ -292,5 +299,38 @@ class Character extends MoveableObject {
     setTimeout(() => {
       this.currentImg = 9;
     }, 800);
+  }
+
+  playSwimSound() {
+    if (!mutedSounds) {
+      sounds.swim_audio.volume = 0.5;
+      sounds.swim_audio.play();
+    }
+  }
+
+  playBubbleShootSound() {
+    if (!mutedSounds) {
+      sounds.bubble_shoot_audio.play();
+    }
+  }
+
+  playFinSlapSound() {
+    if (!mutedSounds) {
+      sounds.fin_slap_audio.play();
+    }
+  }
+
+  playHurtNormalSound() {
+    if (!mutedSounds) {
+      sounds.hurt_audio.volume = 0.3;
+      sounds.hurt_audio.play();
+    }
+  }
+
+  playHurtElectricSound() {
+    if (!mutedSounds) {
+      sounds.hurt_electric_audio.volume = 0.3;
+      sounds.hurt_electric_audio.play();
+    }
   }
 }

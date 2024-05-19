@@ -52,7 +52,7 @@ class World {
     if (this.character.isDeadCharacter) {
     } else {
       if (!this.mutedSounds) {
-        sounds.background_audio.volume = 0.25;
+        sounds.background_audio.volume = 0.1;
         sounds.background_audio.play();
       } else {
         sounds.background_audio.pause();
