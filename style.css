@@ -107,3 +107,66 @@ canvas {
   background-color: rgba(188, 242, 255, 1);
   box-shadow: 0 0 6px 0 rgb(188, 242, 255);
 }
+
+.win-screen {
+  position: relative;
+  height: 480px;
+  width: 720px;
+  background-image: url("img/3. Background/Light/1.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 0 white;
+}
+
+.win-img {
+  height: 480px;
+  width: 720px;
+}
+
+.lost-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 480px;
+  width: 720px;
+  background-image: url("img/3. Background/Dark/2.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 0 white;
+}
+
+.lost-img {
+  height: 100px;
+  width: 500px;
+  padding: 20px;
+  background-color: black;
+  border-radius: 24px;
+  box-shadow: 0 0 6px 0 white;
+}
+
+.try-again-button {
+  position: absolute;
+  height: 60px;
+  width: 250px;
+  right: 240px;
+  bottom: 80px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.try-again-button:hover {
+  height: 70px;
+  width: 280px;
+  right: 225px;
+  bottom: 75px;
+  border-radius: 22px;
+  box-shadow: 0 0 12px 0 rgb(255, 255, 255);
+}

@@ -50,6 +50,11 @@ class World {
 
   checkGameStatus() {
     if (this.character.isDeadCharacter) {
+      this.playLostTheme();
+      setTimeout(() => {
+        clearAllIntervals();
+        showLostScreen();
+      }, 1000);
     } else {
       if (!this.mutedSounds) {
         sounds.background_audio.volume = 0.1;
@@ -57,6 +62,18 @@ class World {
       } else {
         sounds.background_audio.pause();
       }
+    }
+  }
+
+  playLostTheme() {
+    if (!this.mutedSounds) {
+      sounds.background_audio.pause();
+      sounds.endboss_fight_audio.pause();
+      sounds.game_over_audio.volume = 0.1;
+      sounds.game_over_audio.play();
+      setTimeout(() => {
+        this.mutedSounds = true;
+      }, 2000);
     }
   }
 
@@ -270,6 +287,24 @@ class World {
     setTimeout(() => {
       this.level.pufferfishes.splice(hitPufferfish, 1);
     }, 1000);
+  }
+
+  characterWon() {
+    this.playWinningTheme();
+    setTimeout(() => {
+      showWinScreen();
+    }, 2000);
+  }
+
+  playWinningTheme() {
+    if (!this.mutedSounds) {
+      sounds.endboss_fight_audio.pause();
+      sounds.game_won_audio.volume = 0.1;
+      sounds.game_won_audio.play();
+      setTimeout(() => {
+        this.mutedSounds = true;
+      }, 3000);
+    }
   }
 
   draw() {

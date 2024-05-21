@@ -56,6 +56,7 @@ class Endboss extends MoveableObject {
   offsetX = 80;
   y = 1000;
   madEndboss = false;
+  deadEndboss = false;
   following = false;
   attacking = false;
 
@@ -85,6 +86,7 @@ class Endboss extends MoveableObject {
         setTimeout(() => {
           this.madEndboss = false;
         }, 200);
+        this.playEndbossRoarSound();
       } else if (this.attacking) {
         this.playAnimation(this.IMAGES_ATTACKING);
         this.playEndbossBiteSound();
@@ -92,10 +94,11 @@ class Endboss extends MoveableObject {
         this.playAnimation(this.IMAGES_HURT);
         this.playEndbossHurtSound();
       } else if (this.isDead()) {
+        this.deadEndboss = true;
         this.following = false;
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
-          this.deadEndboss();
+          this.isDeadEndboss();
         }, 500);
       } else {
         this.playAnimation(this.IMAGES_SWIMMING);
@@ -111,9 +114,10 @@ class Endboss extends MoveableObject {
     }, 1000);
   }
 
-  deadEndboss() {
+  isDeadEndboss() {
     this.currentImg = 5;
     this.startSinking();
+    this.world.characterWon();
   }
 
   startSinking() {
@@ -138,29 +142,32 @@ class Endboss extends MoveableObject {
   }
 
   playEndbossThemeSound() {
-    if (!this.mutedSounds && this.firstContactEndboss) {
+    if (!mutedSounds && this.firstContactEndboss && !this.deadEndboss) {
       sounds.background_audio.pause();
       sounds.endboss_fight_audio.volume = 0.05;
       sounds.endboss_fight_audio.play();
+    } else {
+      sounds.endboss_fight_audio.pause();
     }
   }
 
   playEndbossBiteSound() {
-    if (!this.mutedSounds) {
+    if (!mutedSounds) {
       sounds.endboss_bite_audio.play();
     }
   }
 
   playEndbossHurtSound() {
-    if (!this.mutedSounds) {
+    if (!mutedSounds) {
       sounds.endboss_hurt_audio.volume = 0.3;
       sounds.endboss_hurt_audio.play();
     }
   }
 
-  playBiteSound() {
-    if (!this.mutedSounds) {
-      sounds.endboss_bite_audio.play();
+  playEndbossRoarSound() {
+    if (!mutedSounds) {
+      sounds.endboss_roar_audio.volume = 0.5;
+      sounds.endboss_roar_audio.play();
     }
   }
 }

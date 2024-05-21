@@ -14,6 +14,7 @@ function init() {
     endboss_bite_audio: new Audio("audio/endboss-bite.mp3"),
     endboss_fight_audio: new Audio("audio/endboss-fight.mp3"),
     endboss_hurt_audio: new Audio("audio/hurt.mp3"),
+    endboss_roar_audio: new Audio("audio/endboss-roar.mp3"),
     fin_slap_audio: new Audio("audio/fin-slap.mp3"),
     game_over_audio: new Audio("audio/game-over.mp3"),
     game_won_audio: new Audio("audio/game-won.mp3"),
@@ -148,4 +149,20 @@ function clearAllIntervals() {
   for (var i = 0; i < highestTimeoutId; i++) {
     clearInterval(i);
   }
+}
+
+function showWinScreen() {
+  let canvasGame = document.getElementById("canvas");
+  let winScreen = document.getElementById("win-screen");
+
+  canvasGame.classList.add("d-none");
+  winScreen.classList.remove("d-none");
+}
+
+function showLostScreen() {
+  let canvasGame = document.getElementById("canvas");
+  let lostScreen = document.getElementById("lost-screen");
+
+  canvasGame.classList.add("d-none");
+  lostScreen.classList.remove("d-none");
 }
