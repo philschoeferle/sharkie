@@ -80,9 +80,8 @@ class World {
   checkCollisionsWithJellyfish() {
     this.level.jellyfishes.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
-        enemy.isDangerousJellyfish();
+        this.character.isCollidingWithJellyfish();
         this.damageCharacter();
-        this.character.updateCollidingWithJellyfish(true);
       }
     });
   }
@@ -96,6 +95,7 @@ class World {
       ) {
         this.damageCharacter();
         enemy.isMadPufferfish();
+        this.character.isCollidingWithPufferfish();
       }
       if (this.character.isColliding(enemy) && this.character.attacking) {
         this.removeHitPufferfish(hitPufferfish);

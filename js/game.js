@@ -144,11 +144,19 @@ function toggleFullscreen() {
   }
 }
 
-function clearAllIntervals() {
-  let highestTimeoutId = setInterval(";");
-  for (var i = 0; i < highestTimeoutId; i++) {
-    clearInterval(i);
-  }
+function showMenuAboutSharkie() {
+  let intTextfield = document.getElementById("instruction-menu-textfield");
+
+  intTextfield.innerHTML = `
+  <div class="instructions-menu-text">
+    <p>In "Sharkie" you play as a powerful shark navigating the ocean depths. 
+    Battle through swarms of jellyfish and pufferfish 
+    using your fin slap and bubble attacks. 
+    Collect toxic bottles to enhance your bubbles with deadly poison to 
+    defeat the mighty orca-endboss and 
+    claim dominance over the deep sea.</p>
+  </div>
+  `;
 }
 
 function showWinScreen() {
@@ -165,4 +173,11 @@ function showLostScreen() {
 
   canvasGame.classList.add("d-none");
   lostScreen.classList.remove("d-none");
+}
+
+function clearAllIntervals() {
+  let highestTimeoutId = setInterval(";");
+  for (var i = 0; i < highestTimeoutId; i++) {
+    clearInterval(i);
+  }
 }

@@ -10,6 +10,7 @@ class MoveableObject extends DrawableObject {
   acceleration = 0.01;
   lastHit = 0;
   collidingWithJellyfish = false;
+  collidingWithPufferfish = false;
   deadJellyfish = false;
   deadPufferfish = false;
   madPufferfish = false;
@@ -118,8 +119,19 @@ class MoveableObject extends DrawableObject {
     this.deadJellyfish = true;
   }
 
-  isDangerousJellyfish() {
+  isCollidingWithJellyfish() {
+    this.collidingWithPufferfish = false;
     this.collidingWithJellyfish = true;
+  }
+
+  isCollidingWithPufferfish() {
+    this.collidingWithJellyfish = false;
+    this.collidingWithPufferfish = true;
+  }
+
+  test() {
+    console.log(this.collidingWithJellyfish);
+    console.log(this.collidingWithPufferfish);
   }
 
   isHurtPufferfish() {

@@ -10,6 +10,7 @@ body {
   align-items: center;
   background-image: url("img/3. Background/Legacy/Dark/1.png");
   font-family: "LuckiestGuy", sans-serif;
+  color: white;
 }
 
 .header {
@@ -68,6 +69,7 @@ canvas {
   align-items: center;
   gap: 30px;
   padding: 16px;
+  position: relative;
 }
 
 .menu-icons {
@@ -82,6 +84,48 @@ canvas {
   border-radius: 5px;
   background-color: rgba(188, 242, 255, 1);
   box-shadow: 0 0 6px 0 rgb(188, 242, 255);
+}
+
+.instructions-menu-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 480px;
+  width: 720px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.instructions-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: rgb(83, 26, 130);
+}
+
+.instructions-menu-headline {
+  transition: all 0.3s ease;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 16px;
+}
+
+.instructions-menu-headline:hover {
+  cursor: pointer;
+  font-size: 28px;
+  background-color: rgb(129, 54, 190);
+  border: 2px solid white;
+  border-radius: 16px;
+  box-shadow: 0 0 6px 0 white;
+}
+
+.instructions-menu-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  font-size: 24px;
 }
 
 .ingame-menu {

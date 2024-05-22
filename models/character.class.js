@@ -268,16 +268,9 @@ class Character extends MoveableObject {
     }, 500);
   }
 
-  updateCollidingWithJellyfish(colliding) {
-    this.collidingWithJellyfish = colliding;
-  }
-
   hurtCharacterAnimation() {
     if (this.collidingWithJellyfish) {
       this.playAnimation(this.IMAGES_HURT_ELECTRIC);
-      setTimeout(() => {
-        this.collidingWithJellyfish = false;
-      }, 1000);
       this.playHurtElectricSound();
     } else {
       this.playAnimation(this.IMAGES_HURT_TOXIC);
