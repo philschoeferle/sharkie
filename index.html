@@ -57,7 +57,7 @@
             alt="game running icon"
           />
         </div>
-        <div onclick="toggleFullscreen()">
+        <div onclick="toggleFullscreenTest()">
           <img
             id="fullscreen-img-start"
             class="ingame-menu-icons"
@@ -84,7 +84,7 @@
             alt="volume icon"
           />
         </div>
-        <div onclick="toggleInstructions()">
+        <div onclick="openInstructions()">
           <img
             id="instructions-img"
             class="menu-icons"
@@ -92,7 +92,7 @@
             alt="instruction icon"
           />
         </div>
-        <div onclick="toggleFullscreen()">
+        <div onclick="toggleFullscreenTest()">
           <img
             id="fullscreen-img-ingame"
             class="menu-icons"
@@ -100,18 +100,36 @@
             alt="fullscreen icon"
           />
         </div>
-        <div id="instructions-menu-screen" class="instructions-menu-screen">
+        <div
+          id="instructions-menu-screen"
+          class="instructions-menu-screen d-none"
+        >
           <div id="instructions-menu" class="instructions-menu">
             <div id="menu-about-sharkie">
-              <h2 onclick="showMenuAboutSharkie()" class="instructions-menu-headline">ABOUT SHARKIE</h2>
+              <h2
+                onclick="showMenuAboutSharkie()"
+                class="instructions-menu-headline"
+              >
+                ABOUT SHARKIE
+              </h2>
             </div>
             <div>
-              <h2 class="instructions-menu-headline">CONTROL</h2>
+              <h2
+                onclick="showMenuControls()"
+                class="instructions-menu-headline"
+              >
+                CONTROLS
+              </h2>
             </div>
             <div>
-              <h2 class="instructions-menu-headline">INSTRUCTION</h2>
+              <h2
+                onclick="showMenuInstructions()"
+                class="instructions-menu-headline"
+              >
+                INSTRUCTIONS
+              </h2>
             </div>
-            <div onclick="toggleInstructions()">
+            <div onclick="closeInstructions()">
               <img
                 id="instructions-img"
                 class="menu-icons"

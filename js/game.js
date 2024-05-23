@@ -121,16 +121,6 @@ function setToggledVolume() {
   }
 }
 
-function toggleInstructions() {
-  let instructionsImg = document.getElementById("instructions-img");
-
-  if (instructionsImg.src.includes("instruction-open.png")) {
-    instructionsImg.src = "img/6.Botones/Menu/instruction-close.png";
-  } else {
-    instructionsImg.src = "img/6.Botones/Menu/instruction-open.png";
-  }
-}
-
 function toggleFullscreen() {
   let fullscreenImgStart = document.getElementById("fullscreen-img-start");
   let fullscreenImgIngame = document.getElementById("fullscreen-img-ingame");
@@ -144,17 +134,91 @@ function toggleFullscreen() {
   }
 }
 
+function toggleFullscreenTest() {
+  let fullscreen = document.getElementById("fullscreen");
+  openFullscreen(fullscreen);
+}
+
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    elem.msRequestFullscreen();
+  }
+}
+
+function openInstructions() {
+  let instructionsScreen = document.getElementById("instructions-menu-screen");
+  instructionsScreen.classList.remove("d-none");
+  showMenuAboutSharkie();
+}
+
+function closeInstructions() {
+  let instructionsScreen = document.getElementById("instructions-menu-screen");
+  instructionsScreen.classList.add("d-none");
+}
+
 function showMenuAboutSharkie() {
   let intTextfield = document.getElementById("instruction-menu-textfield");
+  intTextfield.innerHTML = "";
 
   intTextfield.innerHTML = `
-  <div class="instructions-menu-text">
+  <div class="instructions-menu-about">
     <p>In "Sharkie" you play as a powerful shark navigating the ocean depths. 
-    Battle through swarms of jellyfish and pufferfish 
-    using your fin slap and bubble attacks. 
-    Collect toxic bottles to enhance your bubbles with deadly poison to 
-    defeat the mighty orca-endboss and 
+    Battle through swarms of jellyfish and pufferfish using your fin slap and bubble attacks. 
+    Collect toxic bottles to enhance your bubbles with deadly poison to defeat the mighty orca-endboss and 
     claim dominance over the deep sea.</p>
+  </div>
+  `;
+}
+
+function showMenuControls() {
+  let intTextfield = document.getElementById("instruction-menu-textfield");
+  intTextfield.innerHTML = "";
+
+  intTextfield.innerHTML = `
+  <div class="instructions-menu-control">
+    <div class="instructions-menu-control-div">
+      <span>Movement: </span>
+      <span>Arrow Keys</span>
+    </div>
+    <div class="instructions-menu-control-div">
+      <span>Normal Bubble Attack:</span>
+      <span class="instructions-menu-key">D</span>
+    </div>
+    <div class="instructions-menu-control-div">
+      <span>Toxic Bubble Attack:</span>
+      <span class="instructions-menu-key">S</span>
+    </div>
+    <div class="instructions-menu-control-div">
+      <span>Fin Slap Attack:</span>
+      <span class="instructions-menu-key">SPACE</span>
+    </div>
+  </div>
+  `;
+}
+
+function showMenuInstructions() {
+  let intTextfield = document.getElementById("instruction-menu-textfield");
+  intTextfield.innerHTML = "";
+
+  intTextfield.innerHTML = `
+  <div class="instructions-menu-control">
+    <div class="instructions-menu-control-div">
+      <span>Jellyfish: </span>
+      <span>Can only be damaged<br> with bubble attacks.</span>
+    </div>
+    <div class="instructions-menu-control-div">
+      <span>Pufferfish:</span>
+      <span>Can only be damaged<br> with fin slap attacks.</span>
+    </div>
+    <div class="instructions-menu-control-div">
+      <span>Endboss (Orca):</span>
+      <span>Collect toxic bottles to<br> shoot toxic bubbles,<br> 
+      which are the only way<br> to damage the orca.</span>
+    </div>
   </div>
   `;
 }
