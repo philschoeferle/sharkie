@@ -30,143 +30,145 @@
     <title>Sharkie</title>
   </head>
   <body>
-    <div class="header">
-      <h1>Sharkie</h1>
-      <div id="ingame-menu" class="ingame-menu d-none">
-        <div onclick="backToStart()">
-          <img
-            id="home-img"
-            class="ingame-menu-icons"
-            src="img/6.Botones/Menu/home.png"
-            alt="home icon"
-          />
-        </div>
-        <div onclick="toggleVolume()">
-          <img
-            id="volume-img-ingame"
-            class="ingame-menu-icons"
-            src="img/6.Botones/Menu/volume-off.png"
-            alt="volume icon"
-          />
-        </div>
-        <div onclick="toggleGameRunning()">
-          <img
-            id="game-running-img"
-            class="ingame-menu-icons"
-            src="img/6.Botones/Menu/game-stop.png"
-            alt="game running icon"
-          />
-        </div>
-        <div onclick="toggleFullscreenTest()">
-          <img
-            id="fullscreen-img-start"
-            class="ingame-menu-icons"
-            src="img/6.Botones/Menu/fullscreen-open.png"
-            alt="fullscreen icon"
-          />
-        </div>
-      </div>
-    </div>
-    <canvas id="canvas" class="d-none" width="720px" height="480px"></canvas>
-    <div id="start-screen" class="start-screen">
-      <img
-        onclick="init()"
-        class="start-button"
-        src="img/6.Botones/Start/1.png"
-        alt="start button"
-      />
-      <div class="start-screen-menu">
-        <div onclick="toggleVolume()">
-          <img
-            id="volume-img-start"
-            class="menu-icons"
-            src="img/6.Botones/Menu/volume-off.png"
-            alt="volume icon"
-          />
-        </div>
-        <div onclick="openInstructions()">
-          <img
-            id="instructions-img"
-            class="menu-icons"
-            src="img/6.Botones/Menu/instruction-open.png"
-            alt="instruction icon"
-          />
-        </div>
-        <div onclick="toggleFullscreenTest()">
-          <img
-            id="fullscreen-img-ingame"
-            class="menu-icons"
-            src="img/6.Botones/Menu/fullscreen-open.png"
-            alt="fullscreen icon"
-          />
-        </div>
-        <div
-          id="instructions-menu-screen"
-          class="instructions-menu-screen d-none"
-        >
-          <div id="instructions-menu" class="instructions-menu">
-            <div id="menu-about-sharkie">
-              <h2
-                onclick="showMenuAboutSharkie()"
-                class="instructions-menu-headline"
-              >
-                ABOUT SHARKIE
-              </h2>
-            </div>
-            <div>
-              <h2
-                onclick="showMenuControls()"
-                class="instructions-menu-headline"
-              >
-                CONTROLS
-              </h2>
-            </div>
-            <div>
-              <h2
-                onclick="showMenuInstructions()"
-                class="instructions-menu-headline"
-              >
-                INSTRUCTIONS
-              </h2>
-            </div>
-            <div onclick="closeInstructions()">
-              <img
-                id="instructions-img"
-                class="menu-icons"
-                src="img/6.Botones/Menu/instruction-close.png"
-                alt="instruction icon"
-              />
-            </div>
+    <div id="fullscreen" class="fullscreen">
+      <div class="header">
+        <h1>Sharkie</h1>
+        <div id="ingame-menu" class="ingame-menu d-none">
+          <div onclick="backToStart()">
+            <img
+              id="home-img"
+              class="ingame-menu-icons"
+              src="img/6.Botones/Menu/home.png"
+              alt="home icon"
+            />
           </div>
-          <div id="instruction-menu-textfield"></div>
+          <div onclick="toggleVolume()">
+            <img
+              id="volume-img-ingame"
+              class="ingame-menu-icons"
+              src="img/6.Botones/Menu/volume-off.png"
+              alt="volume icon"
+            />
+          </div>
+          <div onclick="toggleGameRunning()">
+            <img
+              id="game-running-img"
+              class="ingame-menu-icons"
+              src="img/6.Botones/Menu/game-stop.png"
+              alt="game running icon"
+            />
+          </div>
+          <div onclick="toggleFullscreen()">
+            <img
+              id="fullscreen-img-start"
+              class="ingame-menu-icons"
+              src="img/6.Botones/Menu/fullscreen-open.png"
+              alt="fullscreen icon"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    <div id="win-screen" class="win-screen d-none">
-      <img
-        class="win-img"
-        src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png"
-        alt="win image"
-      />
-      <img
-        onclick="backToStart()"
-        class="try-again-button"
-        src="img/6.Botones/Try again/Recurso 16.png"
-        alt="try again button"
-      />
-    </div>
-    <div id="lost-screen" class="lost-screen d-none">
-      <img
-        class="lost-img"
-        src="img/6.Botones/Tittles/Game Over/Recurso 11.png"
-        alt="lost image"
-      />
-      <img
-        onclick="backToStart()"
-        class="try-again-button"
-        src="img/6.Botones/Try again/Recurso 16.png"
-        alt="try again button"
-      />
+      <canvas id="canvas" class="d-none" width="720px" height="480px"></canvas>
+      <div id="start-screen" class="start-screen">
+        <img
+          onclick="init()"
+          class="start-button"
+          src="img/6.Botones/Start/1.png"
+          alt="start button"
+        />
+        <div class="start-screen-menu">
+          <div onclick="toggleVolume()">
+            <img
+              id="volume-img-start"
+              class="menu-icons"
+              src="img/6.Botones/Menu/volume-off.png"
+              alt="volume icon"
+            />
+          </div>
+          <div onclick="openInstructions()">
+            <img
+              id="instructions-img"
+              class="menu-icons"
+              src="img/6.Botones/Menu/instruction-open.png"
+              alt="instruction icon"
+            />
+          </div>
+          <div onclick="toggleFullscreen()">
+            <img
+              id="fullscreen-img-ingame"
+              class="menu-icons"
+              src="img/6.Botones/Menu/fullscreen-open.png"
+              alt="fullscreen icon"
+            />
+          </div>
+          <div
+            id="instructions-menu-screen"
+            class="instructions-menu-screen d-none"
+          >
+            <div id="instructions-menu" class="instructions-menu">
+              <div id="menu-about-sharkie">
+                <h2
+                  onclick="showMenuAboutSharkie()"
+                  class="instructions-menu-headline"
+                >
+                  ABOUT SHARKIE
+                </h2>
+              </div>
+              <div>
+                <h2
+                  onclick="showMenuControls()"
+                  class="instructions-menu-headline"
+                >
+                  CONTROLS
+                </h2>
+              </div>
+              <div>
+                <h2
+                  onclick="showMenuInstructions()"
+                  class="instructions-menu-headline"
+                >
+                  INSTRUCTIONS
+                </h2>
+              </div>
+              <div onclick="closeInstructions()">
+                <img
+                  id="instructions-img"
+                  class="menu-icons"
+                  src="img/6.Botones/Menu/instruction-close.png"
+                  alt="instruction icon"
+                />
+              </div>
+            </div>
+            <div id="instruction-menu-textfield"></div>
+          </div>
+        </div>
+      </div>
+      <div id="win-screen" class="win-screen d-none">
+        <img
+          class="win-img"
+          src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png"
+          alt="win image"
+        />
+        <img
+          onclick="backToStart()"
+          class="try-again-button"
+          src="img/6.Botones/Try again/Recurso 16.png"
+          alt="try again button"
+        />
+      </div>
+      <div id="lost-screen" class="lost-screen d-none">
+        <img
+          class="lost-img"
+          src="img/6.Botones/Tittles/Game Over/Recurso 11.png"
+          alt="lost image"
+        />
+        <img
+          onclick="backToStart()"
+          class="try-again-button"
+          src="img/6.Botones/Try again/Recurso 16.png"
+          alt="try again button"
+        />
+      </div>
     </div>
   </body>
 </html>

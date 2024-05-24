@@ -44,20 +44,24 @@ class JellyfishYellow extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      if (this.swimDirection === "up" && this.y > 50) {
-        this.moveUp();
-      } else if (
-        this.swimDirection === "down" &&
-        this.y < 450 - (this.height + 50)
-      ) {
-        this.moveDown();
-      } else {
-        this.swimDirection = this.swimDirection === "up" ? "down" : "up";
+      if (!pausedGame) {
+        if (this.swimDirection === "up" && this.y > 50) {
+          this.moveUp();
+        } else if (
+          this.swimDirection === "down" &&
+          this.y < 450 - (this.height + 50)
+        ) {
+          this.moveDown();
+        } else {
+          this.swimDirection = this.swimDirection === "up" ? "down" : "up";
+        }
       }
     }, 1000 / 60);
 
     setInterval(() => {
-      this.setJellyfishAnimation();
+      if (!pausedGame) {
+        this.setJellyfishAnimation();
+      }
     }, 200);
   }
 

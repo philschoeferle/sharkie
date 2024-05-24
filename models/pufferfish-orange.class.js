@@ -44,22 +44,26 @@ class PufferfishOrange extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      if (this.swimDirection === "left" && this.x > 100 + Math.random() * 300) {
-        this.moveLeft();
-        this.otherDirection = false;
-      } else if (
-        this.swimDirection === "right" &&
-        this.x < 1500 + Math.random() * 150
-      ) {
-        this.moveRight();
-        this.otherDirection = true;
-      } else {
-        this.swimDirection = this.swimDirection === "left" ? "right" : "left";
+      if (!pausedGame) {
+        if (this.swimDirection === "left" && this.x > 100 + Math.random() * 300) {
+          this.moveLeft();
+          this.otherDirection = false;
+        } else if (
+          this.swimDirection === "right" &&
+          this.x < 1500 + Math.random() * 150
+        ) {
+          this.moveRight();
+          this.otherDirection = true;
+        } else {
+          this.swimDirection = this.swimDirection === "left" ? "right" : "left";
+        }
       }
     }, 1000 / 60);
 
     setInterval(() => {
-      this.setPufferfishAnimation();
+      if (!pausedGame) {
+        this.setPufferfishAnimation();
+      }
     }, 200);
   }
 

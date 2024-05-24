@@ -13,11 +13,12 @@ class World {
   endbossHealthBar = new EndbossHealthBar();
   throwableObjects = [];
 
-  constructor(canvas, keyboard, mutedSounds) {
+  constructor(canvas, keyboard, mutedSounds, pausedGame) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.mutedSounds = mutedSounds;
+    this.pausedGame = pausedGame;
     this.draw();
     this.setWorld();
     this.run();
@@ -30,18 +31,24 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkGameStatus();
-      this.checkCollisionsWithJellyfish();
-      this.checkCollisionsWithPufferfish();
-      this.checkCollisionsWithEndboss();
-      this.checkCollisionsWithCoins();
-      this.checkCollisionsWithBottles();
-      this.checkBubbleCollisionsWithJellyfish();
-      this.checkBubbleCollisionsWithPufferfish();
-      this.checkBubbleCollisionsWithEndboss();
-      this.checkContactWithEndboss();
-      this.endbossFollowCharacter();
+      if (!this.pausedGame) {
+        this.checkGameStatus();
+        this.checkCollisionsWithJellyfish();
+        this.checkCollisionsWithPufferfish();
+        this.checkCollisionsWithEndboss();
+        this.checkCollisionsWithCoins();
+        this.checkCollisionsWithBottles();
+        this.checkBubbleCollisionsWithJellyfish();
+        this.checkBubbleCollisionsWithPufferfish();
+        this.checkBubbleCollisionsWithEndboss();
+        this.checkContactWithEndboss();
+        this.endbossFollowCharacter();
+      }
     }, 200);
+  }
+
+  updateGameRunning(pause) {
+    this.pausedGame = pause;
   }
 
   updateMutedSounds(muted) {
@@ -80,7 +87,8 @@ class World {
   checkCollisionsWithJellyfish() {
     this.level.jellyfishes.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
-        this.character.isCollidingWithJellyfish();
+        this.character.isSharkieCollidingWithJellyfish();
+        enemy.isSharkieCollidingWithJellyfish();
         this.damageCharacter();
       }
     });
@@ -95,7 +103,7 @@ class World {
       ) {
         this.damageCharacter();
         enemy.isMadPufferfish();
-        this.character.isCollidingWithPufferfish();
+        this.character.isSharkieCollidingWithPufferfish();
       }
       if (this.character.isColliding(enemy) && this.character.attacking) {
         this.removeHitPufferfish(hitPufferfish);
@@ -109,6 +117,7 @@ class World {
   checkCollisionsWithEndboss() {
     if (this.character.isCollidingWithEndboss(this.endboss)) {
       this.endboss.isEndbossAttacking();
+      this.character.isSharkieCollidingWithEndboss();
       setTimeout(() => {
         this.damageCharacter();
       }, 1000);

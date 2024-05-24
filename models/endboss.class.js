@@ -76,34 +76,36 @@ class Endboss extends MoveableObject {
     let i = 0;
     this.currentImg = 0;
     setInterval(() => {
-      if (this.firstContactEndboss && i < 10) {
-        this.playAnimation(this.IMAGES_INTRO);
-        this.y = -50;
-        this.following = true;
-        i++;
-      } else if (this.madEndboss) {
-        this.playAnimation(this.IMAGES_ATTACKING);
-        setTimeout(() => {
-          this.madEndboss = false;
-        }, 200);
-        this.playEndbossRoarSound();
-      } else if (this.attacking) {
-        this.playAnimation(this.IMAGES_ATTACKING);
-        this.playEndbossBiteSound();
-      } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-        this.playEndbossHurtSound();
-      } else if (this.isDead()) {
-        this.deadEndboss = true;
-        this.following = false;
-        this.playAnimation(this.IMAGES_DEAD);
-        setTimeout(() => {
-          this.isDeadEndboss();
-        }, 500);
-      } else {
-        this.playAnimation(this.IMAGES_SWIMMING);
+      if (!pausedGame) {
+        if (this.firstContactEndboss && i < 10) {
+          this.playAnimation(this.IMAGES_INTRO);
+          this.y = -50;
+          this.following = true;
+          i++;
+        } else if (this.madEndboss) {
+          this.playAnimation(this.IMAGES_ATTACKING);
+          setTimeout(() => {
+            this.madEndboss = false;
+          }, 200);
+          this.playEndbossRoarSound();
+        } else if (this.attacking) {
+          this.playAnimation(this.IMAGES_ATTACKING);
+          this.playEndbossBiteSound();
+        } else if (this.isHurt()) {
+          this.playAnimation(this.IMAGES_HURT);
+          this.playEndbossHurtSound();
+        } else if (this.isDead()) {
+          this.deadEndboss = true;
+          this.following = false;
+          this.playAnimation(this.IMAGES_DEAD);
+          setTimeout(() => {
+            this.isDeadEndboss();
+          }, 500);
+        } else {
+          this.playAnimation(this.IMAGES_SWIMMING);
+        }
+        this.playEndbossThemeSound();
       }
-      this.playEndbossThemeSound();
     }, 200);
   }
 

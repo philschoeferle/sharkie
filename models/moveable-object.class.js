@@ -11,6 +11,7 @@ class MoveableObject extends DrawableObject {
   lastHit = 0;
   collidingWithJellyfish = false;
   collidingWithPufferfish = false;
+  collidingWithEndboss = false;
   deadJellyfish = false;
   deadPufferfish = false;
   madPufferfish = false;
@@ -119,19 +120,22 @@ class MoveableObject extends DrawableObject {
     this.deadJellyfish = true;
   }
 
-  isCollidingWithJellyfish() {
+  isSharkieCollidingWithJellyfish() {
     this.collidingWithPufferfish = false;
+    this.collidingWithEndboss = false;
     this.collidingWithJellyfish = true;
   }
 
-  isCollidingWithPufferfish() {
+  isSharkieCollidingWithPufferfish() {
+    this.collidingWithEndboss = false;
     this.collidingWithJellyfish = false;
     this.collidingWithPufferfish = true;
   }
 
-  test() {
-    console.log(this.collidingWithJellyfish);
-    console.log(this.collidingWithPufferfish);
+  isSharkieCollidingWithEndboss() {
+    this.collidingWithPufferfish = false;
+    this.collidingWithJellyfish = false;
+    this.collidingWithEndboss = true;
   }
 
   isHurtPufferfish() {
