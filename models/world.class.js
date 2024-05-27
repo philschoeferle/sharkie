@@ -63,12 +63,23 @@ class World {
         showLostScreen();
       }, 1000);
     } else {
-      if (!this.mutedSounds) {
-        sounds.background_audio.volume = 0.1;
-        sounds.background_audio.play();
-      } else {
-        sounds.background_audio.pause();
-      }
+      this.playBackgroundTheme();
+    }
+  }
+
+  characterWon() {
+    this.playWinTheme();
+    setTimeout(() => {
+      showWinScreen();
+    }, 2000);
+  }
+
+  playBackgroundTheme() {
+    if (!this.mutedSounds) {
+      sounds.background_audio.volume = 0.1;
+      sounds.background_audio.play();
+    } else {
+      sounds.background_audio.pause();
     }
   }
 
@@ -81,6 +92,17 @@ class World {
       setTimeout(() => {
         this.mutedSounds = true;
       }, 2000);
+    }
+  }
+
+  playWinTheme() {
+    if (!this.mutedSounds) {
+      sounds.endboss_fight_audio.pause();
+      sounds.game_won_audio.volume = 0.1;
+      sounds.game_won_audio.play();
+      setTimeout(() => {
+        this.mutedSounds = true;
+      }, 3000);
     }
   }
 
@@ -296,24 +318,6 @@ class World {
     setTimeout(() => {
       this.level.pufferfishes.splice(hitPufferfish, 1);
     }, 1000);
-  }
-
-  characterWon() {
-    this.playWinningTheme();
-    setTimeout(() => {
-      showWinScreen();
-    }, 2000);
-  }
-
-  playWinningTheme() {
-    if (!this.mutedSounds) {
-      sounds.endboss_fight_audio.pause();
-      sounds.game_won_audio.volume = 0.1;
-      sounds.game_won_audio.play();
-      setTimeout(() => {
-        this.mutedSounds = true;
-      }, 3000);
-    }
   }
 
   draw() {

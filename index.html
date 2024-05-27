@@ -31,8 +31,11 @@
   </head>
   <body>
     <div id="fullscreen" class="game">
+      <div id="rotate-screen" class="rotate-overlay-screen">
+        <span>Rotate your Device to play!</span>
+      </div>
       <div class="header">
-        <h1>Sharkie</h1>
+        <h1 id="headline">Sharkie</h1>
         <div id="ingame-menu" class="ingame-menu d-none">
           <div onclick="backToStart()">
             <img
@@ -101,46 +104,46 @@
               alt="fullscreen icon"
             />
           </div>
-          <div
-            id="instructions-menu-screen"
-            class="instructions-menu-screen d-none"
-          >
-            <div id="instructions-menu" class="instructions-menu">
-              <div id="menu-about-sharkie">
-                <h2
-                  onclick="showMenuAboutSharkie()"
-                  class="instructions-menu-headline"
-                >
-                  ABOUT SHARKIE
-                </h2>
-              </div>
-              <div>
-                <h2
-                  onclick="showMenuControls()"
-                  class="instructions-menu-headline"
-                >
-                  CONTROLS
-                </h2>
-              </div>
-              <div>
-                <h2
-                  onclick="showMenuInstructions()"
-                  class="instructions-menu-headline"
-                >
-                  INSTRUCTIONS
-                </h2>
-              </div>
-              <div onclick="closeInstructions()">
-                <img
-                  id="instructions-img"
-                  class="menu-icons"
-                  src="img/6.Botones/Menu/instruction-close.png"
-                  alt="instruction icon"
-                />
-              </div>
+        </div>
+        <div
+          id="instructions-menu-screen"
+          class="instructions-menu-screen d-none"
+        >
+          <div id="instructions-menu" class="instructions-menu">
+            <div id="menu-about-sharkie">
+              <h2
+                onclick="showMenuAboutSharkie()"
+                class="instructions-menu-headline"
+              >
+                ABOUT SHARKIE
+              </h2>
             </div>
-            <div id="instruction-menu-textfield"></div>
+            <div>
+              <h2
+                onclick="showMenuControls()"
+                class="instructions-menu-headline"
+              >
+                CONTROLS
+              </h2>
+            </div>
+            <div>
+              <h2
+                onclick="showMenuInstructions()"
+                class="instructions-menu-headline"
+              >
+                INSTRUCTIONS
+              </h2>
+            </div>
+            <div onclick="closeInstructions()">
+              <img
+                id="instructions-img"
+                class="menu-icons"
+                src="img/6.Botones/Menu/instruction-close.png"
+                alt="instruction icon"
+              />
+            </div>
           </div>
+          <div id="instruction-menu-textfield"></div>
         </div>
       </div>
       <div id="win-screen" class="win-screen d-none">
