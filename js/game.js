@@ -80,10 +80,14 @@ function showGame() {
   let startScreen = document.getElementById("start-screen");
   let canvasGame = document.getElementById("canvas");
   let ingameMenu = document.getElementById("ingame-menu");
+  let ingameArrowKeys = document.getElementById("ingame-arrow-keys-div");
+  let ingameLetterKeys = document.getElementById("ingame-letter-keys-div");
 
   startScreen.classList.add("d-none");
   canvasGame.classList.remove("d-none");
   ingameMenu.classList.remove("d-none");
+  ingameArrowKeys.classList.remove("d-none");
+  ingameLetterKeys.classList.remove("d-none");
 }
 
 function backToStart() {
@@ -270,4 +274,3 @@ function clearAllIntervals() {
     clearInterval(i);
   }
 }
-
