@@ -30,6 +30,9 @@ h1 {
 }
 
 .canvas-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -331,14 +334,6 @@ canvas {
 }
 
 @media (max-width: 800px) {
-  .game {
-    width: 95%;
-  }
-
-  canvas {
-    width: 100%;
-  }
-
   .ingame-menu {
     gap: 10px;
     right: -200px;
@@ -347,10 +342,15 @@ canvas {
   }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 730px) {
   .start-screen {
-    height: 100%;
+    height: 85%;
     width: 100%;
+  }
+
+  .start-button {
+    right: 70px;
+    bottom: 40px;
   }
 
   .ingame-menu {
@@ -377,10 +377,40 @@ canvas {
   }
 }
 
-@media screen and (orientation: landscape) and (max-width: 720px) {
+@media screen and (orientation: landscape) and (max-width: 1024px) {
   .game {
     height: 95%;
     width: 75%;
+  }
+
+  .canvas-div {
+    height: 100%;
+    width: 100%;
+  }
+
+  canvas {
+    height: 100%;
+    width: 100%;
+  }
+
+  .lost-screen {
+    height: 100%;
+    width: 100%;
+  }
+
+  .lost-img {
+    height: 25%;
+    width: 75%;
+  }
+
+  .try-again-button {
+    bottom: 10%;
+    right: auto;
+  }
+
+  .try-again-button:hover {
+    bottom: 10%;
+    right: auto;
   }
 
   .ingame-menu {
@@ -393,10 +423,6 @@ canvas {
 
   h1 {
     display: none !important;
-  }
-
-  canvas {
-    height: 100%;
   }
 
   .instructions-menu-screen {
@@ -433,6 +459,7 @@ canvas {
   .ingame-menu {
     top: 0;
     right: -100px;
+    z-index: 1;
   }
 
   .ingame-menu-icons:hover {
@@ -440,5 +467,43 @@ canvas {
     border-radius: 5px;
     background-color: transparent;
     box-shadow: 0 0 0 0 transparent;
+  }
+
+  #fullscreen-img-ingame {
+    display: none !important;
+  }
+
+  #fullscreen-img-start {
+    display: none !important;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 720px) {
+  .ingame-arrow-keys {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+  }
+
+  .ingame-letter-keys-div span {
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
+  .instructions-menu-headline {
+    font-size: 16px;
+  }
+
+  .instructions-menu-headline:hover {
+    cursor: auto;
+    font-size: 16px;
+  }
+
+  .instructions-menu-about {
+    font-size: 16px;
+  }
+
+  .instructions-menu-control {
+    font-size: 16px;
   }
 }

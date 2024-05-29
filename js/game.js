@@ -78,12 +78,14 @@ window.addEventListener("keyup", (e) => {
 
 function showGame() {
   let startScreen = document.getElementById("start-screen");
+  let canvasDiv = document.getElementById("canvas-div");
   let canvasGame = document.getElementById("canvas");
   let ingameMenu = document.getElementById("ingame-menu");
   let ingameArrowKeys = document.getElementById("ingame-arrow-keys-div");
   let ingameLetterKeys = document.getElementById("ingame-letter-keys-div");
 
   startScreen.classList.add("d-none");
+  canvasDiv.classList.remove("d-none");
   canvasGame.classList.remove("d-none");
   ingameMenu.classList.remove("d-none");
   ingameArrowKeys.classList.remove("d-none");
@@ -253,18 +255,26 @@ function showMenuInstructions() {
 }
 
 function showWinScreen() {
+  let canvasDiv = document.getElementById("canvas-div");
   let canvasGame = document.getElementById("canvas");
+  let ingameMenu = document.getElementById("ingame-menu");
   let winScreen = document.getElementById("win-screen");
 
+  canvasDiv.classList.add("d-none");
   canvasGame.classList.add("d-none");
+  ingameMenu.classList.add("d-none");
   winScreen.classList.remove("d-none");
 }
 
 function showLostScreen() {
+  let canvasDiv = document.getElementById("canvas-div");
   let canvasGame = document.getElementById("canvas");
+  let ingameMenu = document.getElementById("ingame-menu");
   let lostScreen = document.getElementById("lost-screen");
 
+  canvasDiv.classList.add("d-none");
   canvasGame.classList.add("d-none");
+  ingameMenu.classList.add("d-none");
   lostScreen.classList.remove("d-none");
 }
 
