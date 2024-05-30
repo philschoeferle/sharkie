@@ -131,6 +131,9 @@ class Character extends MoveableObject {
   }
 
   animate() {
+    /**
+     * Handles the visible control of Sharkie
+     */
     setInterval(() => {
       if (!pausedGame) {
         sounds.swim_audio.pause();
@@ -140,7 +143,10 @@ class Character extends MoveableObject {
         if (this.world.keyboard.DOWN && this.y < 300) {
           this.y += this.speed;
         }
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (
+          this.world.keyboard.RIGHT &&
+          this.x < this.world.level.level_end_x
+        ) {
           this.moveRight();
           this.otherDirection = false;
           this.playSwimSound();
@@ -154,6 +160,9 @@ class Character extends MoveableObject {
       }
     }, 1000 / 60);
 
+    /**
+     * Handles the animation of Sharkie while moving
+     */
     setInterval(() => {
       if (!pausedGame) {
         if (this.world.keyboard.UP && this.y > -80) {
@@ -164,7 +173,10 @@ class Character extends MoveableObject {
           this.idleCounter = 0;
           this.playAnimation(this.IMAGES_SWIMMING);
         }
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (
+          this.world.keyboard.RIGHT &&
+          this.x < this.world.level.level_end_x
+        ) {
           this.idleCounter = 0;
           this.playAnimation(this.IMAGES_SWIMMING);
           this.otherDirection = false;
@@ -177,6 +189,10 @@ class Character extends MoveableObject {
       }
     }, 200);
 
+    /**
+     * Function to handle the appropriate Sharkie-animation dependent on
+     * various requirements
+     */
     setInterval(() => {
       if (!pausedGame) {
         if (this.isDead()) {
@@ -199,6 +215,9 @@ class Character extends MoveableObject {
       }
     }, 150);
 
+    /**
+     * Function to initialize the specific attack functions
+     */
     setInterval(() => {
       if (!pausedGame) {
         if (
@@ -220,6 +239,9 @@ class Character extends MoveableObject {
     }, 150);
   }
 
+  /**
+   * Function to handle the different attack patterns
+   */
   activateAttack() {
     if (!this.attacking) {
       this.currentImg = 0;
@@ -235,6 +257,9 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Function to handle the bubble attack from type normal
+   */
   activateShootNormalBubble() {
     let keyDIsPressed = setInterval(() => {
       this.attacking = true;
@@ -249,6 +274,9 @@ class Character extends MoveableObject {
     }, 500);
   }
 
+  /**
+   * Function to handle the bubble attack from type toxic
+   */
   activateShootToxicBubble() {
     let keySIsPressed = setInterval(() => {
       this.attacking = true;
@@ -263,6 +291,9 @@ class Character extends MoveableObject {
     }, 500);
   }
 
+  /**
+   * Function to handle the slap attack
+   */
   activateSlapAttack() {
     let keySPACEIsPressed = setInterval(() => {
       this.attacking = true;
@@ -276,6 +307,9 @@ class Character extends MoveableObject {
     }, 500);
   }
 
+  /**
+   * Function to filter the specific hurt animations and sounds of Sharkie
+   */
   hurtCharacterAnimation() {
     if (this.collidingWithJellyfish) {
       this.playAnimation(this.IMAGES_HURT_ELECTRIC);
@@ -286,11 +320,17 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Initializes the animation of dead Sharkie
+   */
   deadCharacter() {
     this.deadCharacterAnimation();
     this.isDeadCharacter = true;
   }
 
+  /**
+   * Function to animate the specific death animation of Sharkie
+   */
   deadCharacterAnimation() {
     if (this.collidingWithJellyfish) {
       this.playAnimation(this.IMAGES_DEAD_ELECTRIC);
@@ -302,6 +342,10 @@ class Character extends MoveableObject {
     }, 800);
   }
 
+  /**
+   * Function to play the swim sound while Sharkie is moving and
+   * sounds are not muted
+   */
   playSwimSound() {
     if (!mutedSounds) {
       sounds.swim_audio.volume = 0.5;
@@ -309,18 +353,28 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Function to play the bubble-shot attack sound if sounds are not muted
+   */
   playBubbleShootSound() {
     if (!mutedSounds) {
       sounds.bubble_shoot_audio.play();
     }
   }
 
+  /**
+   * Function to play the slap attack sound if sounds are not muted
+   */
   playFinSlapSound() {
     if (!mutedSounds) {
       sounds.fin_slap_audio.play();
     }
   }
 
+  /**
+   * Function to play the normal hurt sound if Sharkie gets
+   * hit by a pufferfish or the endboss and sounds are not muted
+   */
   playHurtNormalSound() {
     if (!mutedSounds) {
       sounds.hurt_audio.volume = 0.3;
@@ -328,6 +382,10 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Function to play the electric hurt sound if Sharkie gets
+   * hit by a jellyfish and sounds are not muted
+   */
   playHurtElectricSound() {
     if (!mutedSounds) {
       sounds.hurt_electric_audio.volume = 0.3;

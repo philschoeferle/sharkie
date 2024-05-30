@@ -43,9 +43,15 @@ class PufferfishOrange extends MoveableObject {
   }
 
   animate() {
+    /**
+     * Function to handle the movement of the pufferfishes
+     */
     setInterval(() => {
       if (!pausedGame) {
-        if (this.swimDirection === "left" && this.x > 100 + Math.random() * 300) {
+        if (
+          this.swimDirection === "left" &&
+          this.x > 100 + Math.random() * 300
+        ) {
           this.moveLeft();
           this.otherDirection = false;
         } else if (
@@ -60,6 +66,9 @@ class PufferfishOrange extends MoveableObject {
       }
     }, 1000 / 60);
 
+    /**
+     * Function to initialize the pufferfish animation
+     */
     setInterval(() => {
       if (!pausedGame) {
         this.setPufferfishAnimation();
@@ -67,6 +76,10 @@ class PufferfishOrange extends MoveableObject {
     }, 200);
   }
 
+  /**
+   * Function to handle the appropriate pufferfish-animation dependent on
+   * various requirements
+   */
   setPufferfishAnimation() {
     if (this.deadPufferfish) {
       this.playAnimation(this.IMAGES_DEAD);
@@ -81,6 +94,9 @@ class PufferfishOrange extends MoveableObject {
     }
   }
 
+  /**
+   * Function to slowely shrink the hit pufferfish
+   */
   startShrinking() {
     this.speed = 0;
     this.x += 5;

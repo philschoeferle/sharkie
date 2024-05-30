@@ -43,6 +43,10 @@ class JellyfishLila extends MoveableObject {
   }
 
   animate() {
+    /**
+     * Controls up and down movement of the jellyfishes at certain
+     * x-coordinates
+     */
     setInterval(() => {
       if (!pausedGame) {
         if (this.swimDirection === "up" && this.y > 50) {
@@ -58,6 +62,9 @@ class JellyfishLila extends MoveableObject {
       }
     }, 1000 / 60);
 
+    /**
+     * Initializes the jellyfish-animations
+     */
     setInterval(() => {
       if (!pausedGame) {
         this.setJellyfishAnimation();
@@ -65,6 +72,10 @@ class JellyfishLila extends MoveableObject {
     }, 200);
   }
 
+  /**
+   * Function to handle the appropriate jellyfish-animation dependent on
+   * various requirements
+   */
   setJellyfishAnimation() {
     if (this.deadJellyfish) {
       if (this.collidingWithJellyfish) {
@@ -83,12 +94,20 @@ class JellyfishLila extends MoveableObject {
     }
   }
 
+  /**
+   * Initializes the floating to the surface if the jellyfish is dead
+   */
   startFloating() {
     setInterval(() => {
       this.floatToSurface();
     }, 200);
   }
 
+  /**
+   * Function to handle the jellyfish-movement after getting hit by a bubble,
+   * slowley decreasing the y-coordinate while toggle between positive and negativ
+   * x-coordinates to simulate floating to surface
+   */
   floatToSurface() {
     this.y -= 5;
     if (this.floatDirection === "right") {

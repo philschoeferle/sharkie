@@ -24,6 +24,9 @@ class Bottle extends MoveableObject {
   }
 
   animate() {
+    /**
+     * Handles the bottle-animation
+     */
     setInterval(() => {
       if (!pausedGame) {
         this.playAnimation(this.IMAGES_BOTTLE);

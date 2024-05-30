@@ -20,12 +20,21 @@ class CoinBar extends DrawableObject {
     this.setPercentageCoins(0);
   }
 
+  /**
+   * Function to set the current percentage of the coin-bar and either
+   * decreasing or increasing it
+   * @param {number} percentage - current percentage of the coin-bar
+   */
   setPercentageCoins(coin) {
     this.coins = coin;
     let path = this.IMAGES[this.resolveImgIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Sets the bottle-bar image by the current collected coins
+   * @returns appropriate coin-bar image
+   */
   resolveImgIndex() {
     if (this.coins == 10) {
       return 5;

@@ -7,11 +7,19 @@ class DrawableObject {
   imageCache = {};
   currentImg = 0;
 
+  /**
+   * Function to load an image from the current path
+   * @param {string} path - path of the image
+   */
   loadImg(path) {
     this.img = new Image();
     this.img.src = path;
   }
 
+  /**
+   * Function to load multiple images from the current path
+   * @param {array} arr - array of images
+   */
   loadImgs(arr) {
     arr.forEach((path) => {
       let img = new Image();
@@ -20,6 +28,10 @@ class DrawableObject {
     });
   }
 
+  /**
+   * Draws the specific context to the canvas and handles if there's an error
+   * @param {*} ctx
+   */
   draw(ctx) {
     try {
       ctx.drawImage(this.img, this.x, this.y, this.height, this.width);
@@ -29,7 +41,10 @@ class DrawableObject {
     }
   }
 
-  drawFrame(ctx) {
+  /**
+   * Draws a frame about objects to show the specific hitbox
+   */
+  /* drawFrame(ctx) {
     if (
       this instanceof Character ||
       this instanceof JellyfishLila ||
@@ -56,5 +71,5 @@ class DrawableObject {
       }
       ctx.stroke();
     }
-  }
+  } */
 }

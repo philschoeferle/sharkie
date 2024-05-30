@@ -323,6 +323,12 @@ function showMenuAboutSharkie() {
     Battle through swarms of jellyfish and pufferfish using your fin slap and bubble attacks. 
     Collect toxic bottles to enhance your bubbles with deadly poison to defeat the mighty orca-endboss and 
     claim dominance over the deep sea.</p>
+    <div class="instructions-menu-about-sources">
+      <span>Sources:</span>
+      <a href="https://icon-icons.com/de/">Icons</a>
+      <span> - </span>
+      <a href="https://freesound.org/">Sounds</a>
+    </div>
   </div>
   `;
 }

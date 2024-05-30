@@ -11,6 +11,9 @@ class ThrowableObject extends MoveableObject {
     this.shoot();
   }
 
+  /**
+   * Function to initialize the movement of the shot bubble
+   */
   shoot() {
     this.speedY = 30;
     if (!this.characterFacingLeft) {

@@ -20,12 +20,21 @@ class BottleBar extends DrawableObject {
     this.setPercentageBottles(0);
   }
 
+  /**
+   * Function to set the current percentage of the bottle-bar and either
+   * decreasing or increasing it
+   * @param {number} percentage - current percentage of the bottle-bar
+   */
   setPercentageBottles(bottle) {
     this.bottles = bottle;
     let path = this.IMAGES[this.resolveImgIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Sets the bottle-bar image by the current collected bottles
+   * @returns appropriate bottle-bar image
+   */
   resolveImgIndex() {
     if (this.bottles == 5) {
       return 5;

@@ -481,7 +481,7 @@ class World {
     }
 
     object.draw(this.ctx);
-    object.drawFrame(this.ctx);
+    /* object.drawFrame(this.ctx); */ // Function to draw a frame around objects
 
     if (object.otherDirection) {
       this.flipImgBack(object);

@@ -20,12 +20,21 @@ class HealthBar extends DrawableObject {
     this.setPercentage(100);
   }
 
+  /**
+   * Function to set the current percentage of the health-bar and either
+   * decreasing or increasing it
+   * @param {number} percentage - current percentage of the health-bar
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImgIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Sets the health-bar image by the current health percentage of Sharkie
+   * @returns appropriate health-bar image
+   */
   resolveImgIndex() {
     if (this.percentage == 100) {
       return 5;

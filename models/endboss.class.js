@@ -75,6 +75,10 @@ class Endboss extends MoveableObject {
   animate() {
     let i = 0;
     this.currentImg = 0;
+    /**
+     * Function to handle the appropriate endboss-animation and sounds dependent on
+     * various requirements. Also initializes the win-functions if the endboss is dead
+     */
     setInterval(() => {
       if (!pausedGame) {
         if (this.firstContactEndboss && i < 10) {
@@ -109,6 +113,9 @@ class Endboss extends MoveableObject {
     }, 200);
   }
 
+  /**
+   * Function to cool-down the damage to Sharkie after an attack for 1 sec.
+   */
   isEndbossAttacking() {
     this.attacking = true;
     setTimeout(() => {
@@ -116,18 +123,28 @@ class Endboss extends MoveableObject {
     }, 1000);
   }
 
+  /**
+   * Initializes the win functions and death-animation of the endboss
+   */
   isDeadEndboss() {
     this.currentImg = 5;
     this.startSinking();
     this.world.characterWon();
   }
 
+  /**
+   * Initializes the shrink-animation of the endboss
+   */
   startSinking() {
     setInterval(() => {
       this.sinkToBottom();
     }, 200);
   }
 
+  /**
+   * Slowley increasing the y-coordinate while toggle between positive and negative
+   * x-coordinate of the dead endboss to simulate shrinking
+   */
   sinkToBottom() {
     this.y += 5;
     if (this.floatDirection === "right") {
@@ -143,6 +160,10 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Pauses the background-theme and plays the endboss-theme if Sharkie encounters
+   * the endboss and sounds are not muted
+   */
   playEndbossThemeSound() {
     if (!mutedSounds && this.firstContactEndboss && !this.deadEndboss) {
       sounds.background_audio.pause();
@@ -153,12 +174,18 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the sound of the endboss biting if sounds are not muted
+   */
   playEndbossBiteSound() {
     if (!mutedSounds) {
       sounds.endboss_bite_audio.play();
     }
   }
 
+  /**
+   * Plays the sound of the endboss getting hurt if sounds are not muted
+   */
   playEndbossHurtSound() {
     if (!mutedSounds) {
       sounds.endboss_hurt_audio.volume = 0.3;
@@ -166,6 +193,10 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the sound of the endboss roaring if the endboss is mad, because of
+   * getting hit with an normal bubble and sounds are not muted
+   */
   playEndbossRoarSound() {
     if (!mutedSounds) {
       sounds.endboss_roar_audio.volume = 0.5;

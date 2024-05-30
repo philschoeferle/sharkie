@@ -12,6 +12,9 @@ class Light extends MoveableObject {
   }
 
   animate() {
+    /**
+     * Handles the Movement of the light-object
+     */
     setInterval(() => {
       this.moveLeft();
     }, 1000 / 60);

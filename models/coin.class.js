@@ -20,6 +20,9 @@ class Coin extends MoveableObject {
   }
 
   animate() {
+    /**
+     * Handles the animation of the coins
+     */
     setInterval(() => {
       if (!pausedGame) {
         this.playAnimation(this.IMAGES_COIN);
