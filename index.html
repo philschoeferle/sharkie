@@ -28,6 +28,7 @@
     <script src="models/world.class.js" defer></script>
     <script src="js/game.js" defer></script>
     <title>Sharkie</title>
+    <link rel="icon" type="image/x-icon" href="img/7. Icon/sharkie-icon.png" />
   </head>
   <body>
     <div id="fullscreen" class="game">
@@ -80,30 +81,34 @@
         ></canvas>
         <div id="ingame-arrow-keys-div" class="ingame-arrow-keys-div d-none">
           <img
+            id="key-up"
             class="ingame-arrow-keys key-up"
             src="img/6.Botones/Key/key-arrow.png"
             alt="arrow key up"
           />
           <img
+            id="key-left"
             class="ingame-arrow-keys key-left"
             src="img/6.Botones/Key/key-arrow.png"
             alt="arrow key left"
           />
           <img
+            id="key-down"
             class="ingame-arrow-keys key-down"
             src="img/6.Botones/Key/key-arrow.png"
             alt="arrow key down"
           />
           <img
+            id="key-right"
             class="ingame-arrow-keys key-right"
             src="img/6.Botones/Key/key-arrow.png"
             alt="arrow key right"
           />
         </div>
         <div id="ingame-letter-keys-div" class="ingame-letter-keys-div d-none">
-          <span>D</span>
-          <span>S</span>
-          <span>SPACE</span>
+          <span id="key-d">D</span>
+          <span id="key-s">S</span>
+          <span id="key-space">SPACE</span>
         </div>
       </div>
       <div id="start-screen" class="start-screen">

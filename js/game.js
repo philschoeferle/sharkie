@@ -4,6 +4,9 @@ let keyboard = new Keyboard();
 let mutedSounds = true;
 let pausedGame = false;
 
+/**
+ * Function to initialize the game
+ */
 function init() {
   canvas = document.getElementById("canvas");
   sounds = {
@@ -26,8 +29,83 @@ function init() {
   world = new World(canvas, keyboard, mutedSounds, pausedGame);
 
   this.showGame();
+  this.mobileTouchEvents();
 }
 
+/**
+ * Function to initalize touchbuttons for mobile devices to control the character
+ * without keyboard
+ */
+function mobileTouchEvents() {
+  let keyUp = document.getElementById("key-up");
+  let keyLeft = document.getElementById("key-left");
+  let keyDown = document.getElementById("key-down");
+  let keyRight = document.getElementById("key-right");
+
+  let keyD = document.getElementById("key-d");
+  let keyS = document.getElementById("key-s");
+  let keySpace = document.getElementById("key-space");
+
+  keyUp.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.UP = true;
+  });
+
+  keyUp.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.UP = false;
+  });
+
+  keyLeft.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.LEFT = true;
+  });
+
+  keyLeft.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.LEFT = false;
+  });
+
+  keyDown.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.DOWN = true;
+  });
+
+  keyDown.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.DOWN = false;
+  });
+
+  keyRight.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+  });
+
+  keyRight.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = false;
+  });
+
+  keyD.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.D = true;
+  });
+
+  keyS.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.S = true;
+  });
+
+  keySpace.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true;
+  });
+}
+
+/**
+ * Function to initialize the keys to control the character with keyboard by setting
+ * the value to true
+ */
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 38) {
     keyboard.UP = true;
@@ -52,6 +130,10 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+/**
+ * Function to initialize the keys to control the character with keyboard by setting
+ * the value to false
+ */
 window.addEventListener("keyup", (e) => {
   if (e.keyCode == 38) {
     keyboard.UP = false;
@@ -76,6 +158,9 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+/**
+ * Removes the start-screen and then displays the canvas with the game-relevant divs
+ */
 function showGame() {
   let startScreen = document.getElementById("start-screen");
   let canvasDiv = document.getElementById("canvas-div");
@@ -92,10 +177,16 @@ function showGame() {
   ingameLetterKeys.classList.remove("d-none");
 }
 
+/**
+ * Reloads the whole site to show the start-screen
+ */
 function backToStart() {
   window.location.reload();
 }
 
+/**
+ * Function to either stop or resume moveable-objects, so to freeze or resume the game
+ */
 function toggleGameRunning() {
   let gameRunningImg = document.getElementById("game-running-img");
 
@@ -109,12 +200,18 @@ function toggleGameRunning() {
   setGameRunning();
 }
 
+/**
+ * Updates the current state of pausedGame
+ */
 function setGameRunning() {
   if (world) {
     world.updateGameRunning(pausedGame);
   }
 }
 
+/**
+ * Function to either stop or play sounds, including the background-theme
+ */
 function toggleVolume() {
   let volumeImgStart = document.getElementById("volume-img-start");
   let volumeImgIngame = document.getElementById("volume-img-ingame");
@@ -131,12 +228,18 @@ function toggleVolume() {
   setToggledVolume();
 }
 
+/**
+ * Updates the current state of mutedSounds
+ */
 function setToggledVolume() {
   if (world) {
     world.updateMutedSounds(mutedSounds);
   }
 }
 
+/**
+ * Function to either apply or dismatch fullscreen, if the device is a desktop
+ */
 function toggleFullscreen() {
   let fullscreenElement = document.documentElement;
   if (!document.fullscreenElement) {
@@ -147,6 +250,10 @@ function toggleFullscreen() {
   toggleFullscreenImg();
 }
 
+/**
+ * Function to apply the fullscreen
+ * @param {*} elem
+ */
 function openFullscreen(elem) {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
@@ -157,6 +264,9 @@ function openFullscreen(elem) {
   }
 }
 
+/**
+ * Function to dismatch the fullscreen
+ */
 function closeFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
@@ -167,6 +277,9 @@ function closeFullscreen() {
   }
 }
 
+/**
+ * Sets the appropriate fullscreen-icon image for the current fullscreen state
+ */
 function toggleFullscreenImg() {
   let fullscreenImgStart = document.getElementById("fullscreen-img-start");
   let fullscreenImgIngame = document.getElementById("fullscreen-img-ingame");
@@ -180,17 +293,26 @@ function toggleFullscreenImg() {
   }
 }
 
+/**
+ * Shows the instructions-screen
+ */
 function openInstructions() {
   let instructionsScreen = document.getElementById("instructions-menu-screen");
   instructionsScreen.classList.remove("d-none");
   showMenuAboutSharkie();
 }
 
+/**
+ * Closes the instructions-screen
+ */
 function closeInstructions() {
   let instructionsScreen = document.getElementById("instructions-menu-screen");
   instructionsScreen.classList.add("d-none");
 }
 
+/**
+ * Shows a short introduction about Sharkie in the instructions
+ */
 function showMenuAboutSharkie() {
   let intTextfield = document.getElementById("instruction-menu-textfield");
   intTextfield.innerHTML = "";
@@ -205,6 +327,9 @@ function showMenuAboutSharkie() {
   `;
 }
 
+/**
+ * Shows the control of Sharkie in the instructions
+ */
 function showMenuControls() {
   let intTextfield = document.getElementById("instruction-menu-textfield");
   intTextfield.innerHTML = "";
@@ -231,6 +356,9 @@ function showMenuControls() {
   `;
 }
 
+/**
+ * Shows the mechanic-rules of enemies in the instructions
+ */
 function showMenuInstructions() {
   let intTextfield = document.getElementById("instruction-menu-textfield");
   intTextfield.innerHTML = "";
@@ -254,6 +382,9 @@ function showMenuInstructions() {
   `;
 }
 
+/**
+ * Shows the win-screen if sharkie won against the endboss
+ */
 function showWinScreen() {
   let canvasDiv = document.getElementById("canvas-div");
   let canvasGame = document.getElementById("canvas");
@@ -266,6 +397,9 @@ function showWinScreen() {
   winScreen.classList.remove("d-none");
 }
 
+/**
+ * Show a lose-screen if sharkie lost against enemies
+ */
 function showLostScreen() {
   let canvasDiv = document.getElementById("canvas-div");
   let canvasGame = document.getElementById("canvas");
@@ -278,6 +412,9 @@ function showLostScreen() {
   lostScreen.classList.remove("d-none");
 }
 
+/**
+ * Stops every Intevall and resets them
+ */
 function clearAllIntervals() {
   let highestTimeoutId = setInterval(";");
   for (var i = 0; i < highestTimeoutId; i++) {

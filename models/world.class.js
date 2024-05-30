@@ -24,11 +24,17 @@ class World {
     this.run();
   }
 
+  /**
+   * Function to set up the world by assinging character and endboss to it
+   */
   setWorld() {
     this.character.world = this;
     this.endboss.world = this;
   }
 
+  /**
+   * Function to initialize game-relevant intervalles
+   */
   run() {
     setInterval(() => {
       if (!this.pausedGame) {
@@ -47,14 +53,26 @@ class World {
     }, 200);
   }
 
+  /**
+   * Updates the world-class about the current status of pausedGame
+   * @param {boolean} pause
+   */
   updateGameRunning(pause) {
     this.pausedGame = pause;
   }
 
+  /**
+   * Updates the world-class about the current status of mutedSounds
+   * @param {boolean} muted
+   */
   updateMutedSounds(muted) {
     this.mutedSounds = muted;
   }
 
+  /**
+   * Checks the current game status dependent on sharkies health-status and
+   * initializes the appropriate functions
+   */
   checkGameStatus() {
     if (this.character.isDeadCharacter) {
       this.playLostTheme();
@@ -67,6 +85,9 @@ class World {
     }
   }
 
+  /**
+   * Shows the win-screen and initializes the win-theme if sharkie defeated the endboss
+   */
   characterWon() {
     this.playWinTheme();
     setTimeout(() => {
@@ -74,6 +95,9 @@ class World {
     }, 2000);
   }
 
+  /**
+   * Plays the background-theme if the sounds are not muted
+   */
   playBackgroundTheme() {
     if (!this.mutedSounds) {
       sounds.background_audio.volume = 0.1;
@@ -83,6 +107,9 @@ class World {
     }
   }
 
+  /**
+   * Plays the lose-theme if sharkie is defeated and sounds are not muted
+   */
   playLostTheme() {
     if (!this.mutedSounds) {
       sounds.background_audio.pause();
@@ -95,6 +122,9 @@ class World {
     }
   }
 
+  /**
+   * Plays the win-theme if sharkie defeated the endboss and sounds are not muted
+   */
   playWinTheme() {
     if (!this.mutedSounds) {
       sounds.endboss_fight_audio.pause();
@@ -106,6 +136,10 @@ class World {
     }
   }
 
+  /**
+   * Checks if sharkie collidies with a jellyfish and initializes the appropriate
+   * functions
+   */
   checkCollisionsWithJellyfish() {
     this.level.jellyfishes.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !enemy.deadJellyfish) {
@@ -116,6 +150,10 @@ class World {
     });
   }
 
+  /**
+   * Checks if sharkie collidies with a pufferfish and initializes the appropriate
+   * functions
+   */
   checkCollisionsWithPufferfish() {
     this.level.pufferfishes.forEach((enemy, hitPufferfish) => {
       if (
@@ -136,6 +174,10 @@ class World {
     });
   }
 
+  /**
+   * Checks if sharkie collidies with the endboss and initializes the appropriate
+   * functions
+   */
   checkCollisionsWithEndboss() {
     if (this.character.isCollidingWithEndboss(this.endboss)) {
       this.endboss.isEndbossAttacking();
@@ -146,6 +188,10 @@ class World {
     }
   }
 
+  /**
+   * Checks if sharkie is facing the endboss after reaching a certain x-coordinate
+   * and initializes the appropriate functions
+   */
   checkContactWithEndboss() {
     if (this.character.x > 1900) {
       if (!this.character.firstContactEndboss) {
@@ -154,6 +200,9 @@ class World {
     }
   }
 
+  /**
+   * Function to track the coordinates of sharkie
+   */
   endbossFollowCharacter() {
     if (this.endboss.firstContactEndboss && this.endboss.following) {
       let desiredY = this.character.y - this.character.height;
@@ -165,6 +214,11 @@ class World {
     }
   }
 
+  /**
+   * Function to let the endboss move to the updated coordinates of sharkie
+   * @param {number} distanceX - Current x-coordinate distance between Sharkie and Endboss
+   * @param {number} distanceY - Current y-coordinate distance between Sharkie and Endboss
+   */
   checkDistance(distanceX, distanceY) {
     let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
@@ -180,6 +234,10 @@ class World {
     }
   }
 
+  /**
+   * Flips the endboss in the other direction if sharkie moves over an certain x-coordinate
+   * @param {number} moveX - current x-coordinate of sharkie
+   */
   changeEndbossDirection(moveX) {
     if (moveX < 0) {
       this.endboss.otherDirection = false;
@@ -188,6 +246,10 @@ class World {
     }
   }
 
+  /**
+   * Checks if an active bubble collides with the endboss and initializes the appropriate
+   * functions, depending on the type of the bubble
+   */
   checkBubbleCollisionsWithEndboss() {
     setInterval(() => {
       this.throwableObjects.forEach((bubble, shotBubble) => {
@@ -212,11 +274,19 @@ class World {
     }, 500);
   }
 
+  /**
+   * Reduces the health of sharkie and updates the health-bar after
+   * getting hit
+   */
   damageCharacter() {
     this.character.hit(5);
     this.healthBar.setPercentage(this.character.health);
   }
 
+  /**
+   * Checks if Sharkie is colliding with a coin and initializes the appropriate
+   * functions
+   */
   checkCollisionsWithCoins() {
     this.level.coins.forEach((coin, currentCoin) => {
       if (this.character.isColliding(coin)) {
@@ -227,12 +297,20 @@ class World {
     });
   }
 
+  /**
+   * Removes the collected coin from the game
+   * @param {number} currentCoin - current coin by index
+   */
   removeCollectedCoin(currentCoin) {
     if (this.character.coinsAmountFull === false) {
       this.level.coins.splice(currentCoin, 1);
     }
   }
 
+  /**
+   * Checks if Sharkie is colliding with a bottle and initializes the appropriate
+   * functions
+   */
   checkCollisionsWithBottles() {
     this.level.bottles.forEach((bottle, currentBottle) => {
       if (this.character.isColliding(bottle)) {
@@ -243,12 +321,20 @@ class World {
     });
   }
 
+  /**
+   * Removes the collected bottle from the game
+   * @param {number} currentBottle - current bottle by index
+   */
   removeCollectedBottle(currentBottle) {
     if (this.character.bottlesAmountFull === false) {
       this.level.bottles.splice(currentBottle, 1);
     }
   }
 
+  /**
+   * Shoots a bubble from type "normal" either to positiv or negativ x-coordinates,
+   * depending of the direction sharkie is facing
+   */
   shootNormalBubble() {
     let bubble = new ThrowableObject(
       this.character.x + 160,
@@ -260,6 +346,10 @@ class World {
     this.throwableObjects.push(bubble);
   }
 
+  /**
+   * Shoots a bubble from type "toxic" either to positiv or negativ x-coordinates,
+   * depending of the direction sharkie is facing. Also updates the the bottle-bar
+   */
   shootToxicBubble() {
     let bubble = new ThrowableObject(
       this.character.x + 160,
@@ -273,6 +363,10 @@ class World {
     this.bottleBar.setPercentageBottles(this.character.bottles);
   }
 
+  /**
+   * Checks if the shot bubble is colliding with a jellyfish and initializes
+   * the appropriate functions
+   */
   checkBubbleCollisionsWithJellyfish() {
     setInterval(() => {
       this.throwableObjects.forEach((bubble, shotBubble) => {
@@ -289,16 +383,28 @@ class World {
     }, 500);
   }
 
+  /**
+   * Removes the shot bubble, if it collided with an enemy
+   * @param {number} shotBubble - current shot bubble by index
+   */
   removeShotBubble(shotBubble) {
     this.throwableObjects.splice(shotBubble, 1);
   }
 
+  /**
+   * Removes the hit jellyfish
+   * @param {number} hitJellyfish - hit jellyfish by index
+   */
   removeHitJellyfish(hitJellyfish) {
     setTimeout(() => {
       this.level.jellyfishes.splice(hitJellyfish, 1);
     }, 5000);
   }
 
+  /**
+   * Checks if the shot bubble is colliding with a pufferfish and initializes
+   * the appropriate functions
+   */
   checkBubbleCollisionsWithPufferfish() {
     setInterval(() => {
       this.throwableObjects.forEach((bubble, shotBubble) => {
@@ -314,12 +420,19 @@ class World {
     }, 500);
   }
 
+  /**
+   * Removes the hit pufferfish
+   * @param {number} hitPufferfish - hit pufferfish by index
+   */
   removeHitPufferfish(hitPufferfish) {
     setTimeout(() => {
       this.level.pufferfishes.splice(hitPufferfish, 1);
     }, 1000);
   }
 
+  /**
+   * Draws all objects onto the canvas
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -348,12 +461,20 @@ class World {
     });
   }
 
+  /**
+   * Adds multiple objects from an array to the map
+   * @param {array} objects - objects array
+   */
   addObjectsToMap(objects) {
     objects.forEach((object) => {
       this.addToMap(object);
     });
   }
 
+  /**
+   * Adds a single object to the map
+   * @param {object} object - single object
+   */
   addToMap(object) {
     if (object.otherDirection) {
       this.flipImg(object);
@@ -367,6 +488,10 @@ class World {
     }
   }
 
+  /**
+   * Flips the image
+   * @param {object} object - object image
+   */
   flipImg(object) {
     this.ctx.save();
     this.ctx.translate(object.width, 0);
@@ -374,6 +499,10 @@ class World {
     object.x = object.x * -1;
   }
 
+  /**
+   * Flips the image back to "normal"
+   * @param {object} object - object image
+   */
   flipImgBack(object) {
     object.x = object.x * -1;
     this.ctx.restore();
