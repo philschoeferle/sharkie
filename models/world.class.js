@@ -74,15 +74,17 @@ class World {
    * initializes the appropriate functions
    */
   checkGameStatus() {
-    if (this.character.isDeadCharacter) {
-      this.playLostTheme();
-      setTimeout(() => {
-        clearAllIntervals();
-        showLostScreen();
-      }, 1000);
-    } else {
+    if (!this.character.isDeadCharacter) {
       this.playBackgroundTheme();
     }
+  }
+
+  characterLost() {
+    this.playLostTheme();
+    setTimeout(() => {
+      showLostScreen();
+      this.character.isDeadCharacter = false;
+    }, 1000);
   }
 
   /**

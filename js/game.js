@@ -181,7 +181,23 @@ function showGame() {
  * Reloads the whole site to show the start-screen
  */
 function backToStart() {
-  window.location.reload();
+  let startScreen = document.getElementById("start-screen");
+  let lostScreen = document.getElementById("lost-screen");
+  let winScreen = document.getElementById("win-screen");
+  let canvasDiv = document.getElementById("canvas-div");
+  let canvasGame = document.getElementById("canvas");
+  let ingameMenu = document.getElementById("ingame-menu");
+  let ingameArrowKeys = document.getElementById("ingame-arrow-keys-div");
+  let ingameLetterKeys = document.getElementById("ingame-letter-keys-div");
+
+  startScreen.classList.remove("d-none");
+  lostScreen.classList.add("d-none");
+  winScreen.classList.add("d-none");
+  canvasDiv.classList.add("d-none");
+  canvasGame.classList.add("d-none");
+  ingameMenu.classList.add("d-none");
+  ingameArrowKeys.classList.add("d-none");
+  ingameLetterKeys.classList.add("d-none");
 }
 
 /**
@@ -423,7 +439,8 @@ function showLostScreen() {
  */
 function clearAllIntervals() {
   let highestTimeoutId = setInterval(";");
-  for (var i = 0; i < highestTimeoutId; i++) {
+  for (let i = 0; i < highestTimeoutId; i++) {
     clearInterval(i);
   }
+  init();
 }

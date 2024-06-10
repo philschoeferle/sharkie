@@ -326,6 +326,7 @@ class Character extends MoveableObject {
   deadCharacter() {
     this.deadCharacterAnimation();
     this.isDeadCharacter = true;
+    this.world.characterLost();
   }
 
   /**
