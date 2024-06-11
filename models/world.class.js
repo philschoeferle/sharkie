@@ -70,22 +70,19 @@ class World {
   }
 
   /**
-   * Checks the current game status dependent on sharkies health-status and
-   * initializes the appropriate functions
+   * Resets the game-relevant settings
    */
-  checkGameStatus() {
-    if (!this.character.isDeadCharacter) {
-      this.playBackgroundTheme();
-    } else {
-      console.log("he's dead");
-    }
-  }
-
-  restartGame() {
+  resetGameSettings() {
+    this.level = level1;
     this.character.isDeadCharacter = false;
     this.pausedGame = false;
   }
 
+  /**
+   * Shows the lost-screen and initializes the lost-theme if sharkie got
+   * defeated by an enemie. Also clears all intervals, so the game can
+   * restart properly
+   */
   characterLost() {
     this.playLostTheme();
     setTimeout(() => {
@@ -95,13 +92,25 @@ class World {
   }
 
   /**
-   * Shows the win-screen and initializes the win-theme if sharkie defeated the endboss
+   * Shows the win-screen and initializes the win-theme if sharkie defeated
+   * the endboss. Also clears all intervals, so the game can restart properly
    */
   characterWon() {
     this.playWinTheme();
     setTimeout(() => {
       showWinScreen();
+      clearAllIntervals();
     }, 2000);
+  }
+
+  /**
+   * Checks the current game status dependent on sharkies health-status and
+   * controls the background-theme
+   */
+  checkGameStatus() {
+    if (!this.character.isDeadCharacter) {
+      this.playBackgroundTheme();
+    }
   }
 
   /**

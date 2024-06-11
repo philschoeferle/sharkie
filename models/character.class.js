@@ -130,69 +130,153 @@ class Character extends MoveableObject {
     this.animate();
   }
 
+  /**
+   * Initializes the different animation-szenarios of Sharkie
+   */
   animate() {
-    /**
-     * Handles the visible control of Sharkie
-     */
+    this.characterControl();
+    this.characterMoveAnimation();
+    this.characterStateAnimation();
+    this.characterAttacks();
+  }
+
+  /**
+   * Handles the visible control of Sharkie
+   */
+  characterControl() {
     setInterval(() => {
       if (!pausedGame) {
         sounds.swim_audio.pause();
-        if (this.world.keyboard.UP && this.y > -80) {
-          this.y -= this.speed;
-        }
-        if (this.world.keyboard.DOWN && this.y < 300) {
-          this.y += this.speed;
-        }
-        if (
-          this.world.keyboard.RIGHT &&
-          this.x < this.world.level.level_end_x
-        ) {
-          this.moveRight();
-          this.otherDirection = false;
-          this.playSwimSound();
-        }
-        if (this.world.keyboard.LEFT && this.x > 0) {
-          this.moveLeft();
-          this.otherDirection = true;
-          this.playSwimSound();
-        }
+
+        this.checkIfMovingUp();
+        this.checkIfMovingDown();
+        this.checkIfMovingRight();
+        this.checkIfMovingLeft();
+
         this.world.camera_x = -this.x + 100;
       }
     }, 1000 / 60);
+  }
 
-    /**
-     * Handles the animation of Sharkie while moving
-     */
+  /**
+   * Function to control the up-movement
+   */
+  checkIfMovingUp() {
+    if (this.world.keyboard.UP && this.y > -80) {
+      this.y -= this.speed;
+    }
+  }
+
+  /**
+   * Function to control the down-movement
+   */
+  checkIfMovingDown() {
+    if (this.world.keyboard.DOWN && this.y < 300) {
+      this.y += this.speed;
+    }
+  }
+
+  /**
+   * Function to control the right-movement
+   */
+  checkIfMovingRight() {
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.characterMoveRight();
+    }
+  }
+
+  /**
+   * Function to control the left-movement
+   */
+  checkIfMovingLeft() {
+    if (this.world.keyboard.LEFT && this.x > 0) {
+      this.characterMoveLeft();
+    }
+  }
+
+  /**
+   * Handles the visual character-movement to the right
+   */
+  characterMoveRight() {
+    this.moveRight();
+    this.otherDirection = false;
+    this.playSwimSound();
+  }
+
+  /**
+   * Handles the visual character-movement to the left
+   */
+  characterMoveLeft() {
+    this.moveLeft();
+    this.otherDirection = true;
+    this.playSwimSound();
+  }
+
+  /**
+   * Handles the animation of Sharkie while moving
+   */
+  characterMoveAnimation() {
     setInterval(() => {
       if (!pausedGame) {
-        if (this.world.keyboard.UP && this.y > -80) {
-          this.idleCounter = 0;
-          this.playAnimation(this.IMAGES_SWIMMING);
-        }
-        if (this.world.keyboard.DOWN && this.y < 300) {
-          this.idleCounter = 0;
-          this.playAnimation(this.IMAGES_SWIMMING);
-        }
-        if (
-          this.world.keyboard.RIGHT &&
-          this.x < this.world.level.level_end_x
-        ) {
-          this.idleCounter = 0;
-          this.playAnimation(this.IMAGES_SWIMMING);
-          this.otherDirection = false;
-        }
-        if (this.world.keyboard.LEFT && this.x > 0) {
-          this.idleCounter = 0;
-          this.playAnimation(this.IMAGES_SWIMMING);
-          this.otherDirection = true;
-        }
+        this.checkAnimationMoveUp();
+        this.checkAnimationMoveDown();
+        this.checkAnimationMoveRight();
+        this.checkAnimationMoveLeft();
       }
     }, 200);
+  }
 
-    /**
-     * Function to handle the appropriate Sharkie-animation dependent on
-     * various requirements
-     */
+  /**
+   * Handles the animation of Sharkie while moving up
+   */
+  checkAnimationMoveUp() {
+    if (this.world.keyboard.UP && this.y > -80) {
+      this.swimAnimation();
+    }
+  }
+
+  /**
+   * Handles the animation of Sharkie while moving down
+   */
+  checkAnimationMoveDown() {
+    if (this.world.keyboard.DOWN && this.y < 300) {
+      this.swimAnimation();
+    }
+  }
+
+  /**
+   * Handles the animation of Sharkie while moving right
+   */
+  checkAnimationMoveRight() {
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.swimAnimation();
+      this.otherDirection = false;
+    }
+  }
+
+  /**
+   * Handles the animation of Sharkie while moving left
+   */
+  checkAnimationMoveLeft() {
+    if (this.world.keyboard.LEFT && this.x > 0) {
+      this.swimAnimation();
+      this.otherDirection = true;
+    }
+  }
+
+  /**
+   * Shows the swim animation and resets the idleCounter
+   */
+  swimAnimation() {
+    this.idleCounter = 0;
+    this.playAnimation(this.IMAGES_SWIMMING);
+  }
+
+  /**
+   * Function to handle the appropriate Sharkie-animation dependent on
+   * various requirements
+   */
+  characterStateAnimation() {
     setInterval(() => {
       if (!pausedGame) {
         if (this.isDead()) {
@@ -201,8 +285,7 @@ class Character extends MoveableObject {
           this.hurtCharacterAnimation();
           this.idleCounter = 0;
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-          this.playAnimation(this.IMAGES_SWIMMING);
-          this.idleCounter = 0;
+          this.swimAnimation();
         } else if (this.idleCounter <= 50) {
           this.playAnimation(this.IMAGES_IDLE);
           this.idleCounter += 1;
@@ -214,29 +297,45 @@ class Character extends MoveableObject {
         }
       }
     }, 150);
+  }
 
-    /**
-     * Function to initialize the specific attack functions
-     */
+  /**
+   * Function to initialize the specific attack functions
+   */
+  characterAttacks() {
     setInterval(() => {
       if (!pausedGame) {
         if (
           this.world.keyboard.D ||
           (this.world.keyboard.S && this.bottles > 0)
         ) {
-          this.idleCounter = 0;
-          this.activateAttack();
-          this.playAnimation(this.IMAGES_ATTACK_BUBBLE);
-          this.attacking = true;
+          this.characterBubbleAttack();
         }
         if (this.world.keyboard.SPACE) {
-          this.idleCounter = 0;
-          this.activateAttack();
-          this.playAnimation(this.IMAGES_ATTACK_SLAP);
-          this.attacking = true;
+          this.characterSlapAttack();
         }
       }
     }, 150);
+  }
+
+  /**
+   * Initializes the bubble attack functions
+   */
+  characterBubbleAttack() {
+    this.idleCounter = 0;
+    this.activateAttack();
+    this.playAnimation(this.IMAGES_ATTACK_BUBBLE);
+    this.attacking = true;
+  }
+
+  /**
+   * Initializes the slap attack functions
+   */
+  characterSlapAttack() {
+    this.idleCounter = 0;
+    this.activateAttack();
+    this.playAnimation(this.IMAGES_ATTACK_SLAP);
+    this.attacking = true;
   }
 
   /**

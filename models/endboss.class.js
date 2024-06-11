@@ -75,42 +75,73 @@ class Endboss extends MoveableObject {
   animate() {
     let i = 0;
     this.currentImg = 0;
-    /**
-     * Function to handle the appropriate endboss-animation and sounds dependent on
-     * various requirements. Also initializes the win-functions if the endboss is dead
-     */
     setInterval(() => {
       if (!pausedGame) {
         if (this.firstContactEndboss && i < 10) {
-          this.playAnimation(this.IMAGES_INTRO);
-          this.y = -50;
-          this.following = true;
+          this.playIntroAnimation();
           i++;
         } else if (this.madEndboss) {
-          this.playAnimation(this.IMAGES_ATTACKING);
-          setTimeout(() => {
-            this.madEndboss = false;
-          }, 200);
-          this.playEndbossRoarSound();
+          this.playMadEndbossAnimation();
         } else if (this.attacking) {
-          this.playAnimation(this.IMAGES_ATTACKING);
-          this.playEndbossBiteSound();
+          this.playEndbossAttackingAnimation();
         } else if (this.isHurt()) {
-          this.playAnimation(this.IMAGES_HURT);
-          this.playEndbossHurtSound();
+          this.playEndbossHurtAnimation();
         } else if (this.isDead()) {
-          this.deadEndboss = true;
-          this.following = false;
-          this.playAnimation(this.IMAGES_DEAD);
-          setTimeout(() => {
-            this.isDeadEndboss();
-          }, 500);
+          this.endbossIsDefeated();
         } else {
           this.playAnimation(this.IMAGES_SWIMMING);
         }
         this.playEndbossThemeSound();
       }
     }, 200);
+  }
+
+  /**
+   * Shows the Intro of the endboss
+   */
+  playIntroAnimation() {
+    this.playAnimation(this.IMAGES_INTRO);
+    this.y = -50;
+    this.following = true;
+  }
+
+  /**
+   * Shows the mad-endboss animation if he gets hit by the normal bubble
+   */
+  playMadEndbossAnimation() {
+    this.playAnimation(this.IMAGES_ATTACKING);
+    setTimeout(() => {
+      this.madEndboss = false;
+    }, 200);
+    this.playEndbossRoarSound();
+  }
+
+  /**
+   * Shows the attacking animation of the endboss if he collides with Sharkie
+   */
+  playEndbossAttackingAnimation() {
+    this.playAnimation(this.IMAGES_ATTACKING);
+    this.playEndbossBiteSound();
+  }
+
+  /**
+   * Shows the hurt-animation of the endboss if he gets damage
+   */
+  playEndbossHurtAnimation() {
+    this.playAnimation(this.IMAGES_HURT);
+    this.playEndbossHurtSound();
+  }
+
+  /**
+   * Initializes the win of Sharkie by defeating the endboss
+   */
+  endbossIsDefeated() {
+    this.deadEndboss = true;
+    this.following = false;
+    this.playAnimation(this.IMAGES_DEAD);
+    setTimeout(() => {
+      this.isDeadEndboss();
+    }, 500);
   }
 
   /**

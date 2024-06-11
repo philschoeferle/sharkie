@@ -10,6 +10,7 @@ let pausedGame = false;
 function init() {
   canvas = document.getElementById("canvas");
 
+  initLevel();
   initSounds();
   initWorld();
   showGame();
@@ -43,6 +44,7 @@ function initSounds() {
  * Function to initialize the game details
  */
 function initWorld() {
+  world = null;
   world = new World(canvas, keyboard, mutedSounds, pausedGame);
 }
 
@@ -172,6 +174,22 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+function backToStart() {
+  let startScreen = document.getElementById("start-screen");
+  let canvasDiv = document.getElementById("canvas-div");
+  let canvasGame = document.getElementById("canvas");
+  let ingameMenu = document.getElementById("ingame-menu");
+  let ingameArrowKeys = document.getElementById("ingame-arrow-keys-div");
+  let ingameLetterKeys = document.getElementById("ingame-letter-keys-div");
+
+  startScreen.classList.remove("d-none");
+  canvasDiv.classList.add("d-none");
+  canvasGame.classList.add("d-none");
+  ingameMenu.classList.add("d-none");
+  ingameArrowKeys.classList.add("d-none");
+  ingameLetterKeys.classList.add("d-none");
+}
+
 /**
  * Removes the start-screen and then displays the canvas with the game-relevant divs
  */
@@ -192,9 +210,9 @@ function showGame() {
 }
 
 /**
- * Reloads the whole site to show the start-screen
+ * Removes the win-/lost-screen and restarts the game
  */
-function backToStart() {
+function restartGame() {
   let lostScreen = document.getElementById("lost-screen");
   let winScreen = document.getElementById("win-screen");
 
@@ -202,8 +220,9 @@ function backToStart() {
   winScreen.classList.add("d-none");
 
   showGame();
+  initLevel();
   initWorld();
-  world.restartGame();
+  world.resetGameSettings();
 }
 
 /**
