@@ -40,36 +40,4 @@ class DrawableObject {
       console.log("Could not load image, ", this);
     }
   }
-
-  /**
-   * Draws a frame about objects to show the specific hitbox
-   */
-  /* drawFrame(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof JellyfishLila ||
-      this instanceof JellyfishYellow ||
-      this instanceof PufferfishRed ||
-      this instanceof PufferfishGreen ||
-      this instanceof PufferfishOrange ||
-      this instanceof Endboss
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "2";
-      ctx.strokeStyle = "red";
-      if (this instanceof Character) {
-        ctx.rect(this.x + 25, this.y + 80, this.height - 50, this.width - 120);
-      } else if (this instanceof Endboss) {
-        ctx.rect(
-          this.x + 40,
-          this.y + 250,
-          this.height - 120,
-          this.width - 350
-        );
-      } else {
-        ctx.rect(this.x, this.y, this.height, this.width);
-      }
-      ctx.stroke();
-    }
-  } */
 }
