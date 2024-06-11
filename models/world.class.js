@@ -76,14 +76,21 @@ class World {
   checkGameStatus() {
     if (!this.character.isDeadCharacter) {
       this.playBackgroundTheme();
+    } else {
+      console.log("he's dead");
     }
+  }
+
+  restartGame() {
+    this.character.isDeadCharacter = false;
+    this.pausedGame = false;
   }
 
   characterLost() {
     this.playLostTheme();
     setTimeout(() => {
       showLostScreen();
-      this.character.isDeadCharacter = false;
+      clearAllIntervals();
     }, 1000);
   }
 

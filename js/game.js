@@ -9,6 +9,17 @@ let pausedGame = false;
  */
 function init() {
   canvas = document.getElementById("canvas");
+
+  initSounds();
+  initWorld();
+  showGame();
+  mobileTouchEvents();
+}
+
+/**
+ * Function to initialize the game sounds
+ */
+function initSounds() {
   sounds = {
     background_audio: new Audio("audio/background-hiphop-beat.mp3"),
     bubble_pop_audio: new Audio("audio/bubble-pop.mp3"),
@@ -26,10 +37,13 @@ function init() {
     hurt_electric_audio: new Audio("audio/hurt-electric.mp3"),
     swim_audio: new Audio("audio/swim.mp3"),
   };
-  world = new World(canvas, keyboard, mutedSounds, pausedGame);
+}
 
-  this.showGame();
-  this.mobileTouchEvents();
+/**
+ * Function to initialize the game details
+ */
+function initWorld() {
+  world = new World(canvas, keyboard, mutedSounds, pausedGame);
 }
 
 /**
@@ -181,23 +195,15 @@ function showGame() {
  * Reloads the whole site to show the start-screen
  */
 function backToStart() {
-  let startScreen = document.getElementById("start-screen");
   let lostScreen = document.getElementById("lost-screen");
   let winScreen = document.getElementById("win-screen");
-  let canvasDiv = document.getElementById("canvas-div");
-  let canvasGame = document.getElementById("canvas");
-  let ingameMenu = document.getElementById("ingame-menu");
-  let ingameArrowKeys = document.getElementById("ingame-arrow-keys-div");
-  let ingameLetterKeys = document.getElementById("ingame-letter-keys-div");
 
-  startScreen.classList.remove("d-none");
   lostScreen.classList.add("d-none");
   winScreen.classList.add("d-none");
-  canvasDiv.classList.add("d-none");
-  canvasGame.classList.add("d-none");
-  ingameMenu.classList.add("d-none");
-  ingameArrowKeys.classList.add("d-none");
-  ingameLetterKeys.classList.add("d-none");
+
+  showGame();
+  initWorld();
+  world.restartGame();
 }
 
 /**
@@ -438,9 +444,5 @@ function showLostScreen() {
  * Stops every Intevall and resets them
  */
 function clearAllIntervals() {
-  let highestTimeoutId = setInterval(";");
-  for (let i = 0; i < highestTimeoutId; i++) {
-    clearInterval(i);
-  }
-  init();
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
