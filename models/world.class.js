@@ -1,5 +1,6 @@
 class World {
   character = new Character();
+  characterAssets;
   level = level1;
   canvas;
   ctx;
@@ -13,10 +14,11 @@ class World {
   endbossHealthBar = new EndbossHealthBar();
   throwableObjects = [];
 
-  constructor(canvas, keyboard, mutedSounds, pausedGame) {
+  constructor(canvas, keyboard, characterAssets, mutedSounds, pausedGame) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.characterAssets = characterAssets;
     this.mutedSounds = mutedSounds;
     this.pausedGame = pausedGame;
     this.draw();
